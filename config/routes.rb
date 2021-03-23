@@ -1,27 +1,32 @@
 Rails.application.routes.draw do
 
-  resources :administradores
-  resources :perfiles
-  resources :mejoras
-  resources :mensajes
-  resources :observaciones
+
+  # SCOPE APLICACION
+  scope module: 'aplicacion' do
+    resources :administradores
+    resources :mejoras
+    resources :observaciones
+    resources :perfiles
+    resources :recursos do
+      collection do
+        match :home, via: :get
+      end
+    end
+  end
 
   # SCOPE HELP
   scope module: 'help' do
+    resources :conversaciones
+    resources :mensajes
+    resources :pasos
     resources :tema_ayudas do
       resources :tutoriales
     end
-    resources :pasos
     resources :tutoriales do
       resources :pasos
     end
   end
 
-  resources :recursos do
-    collection do
-      match :home, via: :get
-    end
-  end
   devise_for :usuarios, controllers: {
         confirmations: 'usuarios/confirmations',
 #        omniauth_callbacks: 'usuarios/omniauth_callbacks',

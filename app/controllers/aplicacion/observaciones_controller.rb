@@ -1,4 +1,4 @@
-class ObservacionesController < ApplicationController
+class Aplicacion::ObservacionesController < ApplicationController
   before_action :set_observacion, only: %i[ show edit update destroy ]
 
   # GET /observaciones or /observaciones.json

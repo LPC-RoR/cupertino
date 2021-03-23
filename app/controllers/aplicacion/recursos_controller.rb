@@ -1,4 +1,4 @@
-class RecursosController < ApplicationController
+class Aplicacion::RecursosController < ApplicationController
   before_action :inicia_sesion
   before_action :carga_temas_ayuda
 #  before_action :set_recurso, only: [:show, :edit, :update, :destroy]

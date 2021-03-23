@@ -8,12 +8,6 @@ module RecursosHelper
     # se usa directamente en 0p/navbar/_navbar.html.erb
 	def menu
 	    [
-#	        ["Publicaciones",   "/publicaciones",             'usuario'],
-#	        ["Ingresos",        "/ingresos",                  'usuario'],
-#	        ["Proyectos",       "/proyectos",                 'usuario'],
-#	        ["Carpetas",        "/carpetas",        'usuario'],
-#	        ["Temas",           "/temas",                     'usuario'],
-#	        ["Bibliografía",    "/recursos/bibliografia",     'usuario'],
 	        ['Áreas Base',      '/area_bases',                'usuario'],
 	        ["Documentos Base", "/documento_bases",           'usuario'],
 	        ["Administradores", "/administradores",             'admin'],

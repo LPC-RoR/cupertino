@@ -1,4 +1,4 @@
-class PerfilesController < ApplicationController
+class Aplicacion::PerfilesController < ApplicationController
   before_action :set_perfil, only: %i[ show edit update destroy ]
 
   # GET /perfiles or /perfiles.json

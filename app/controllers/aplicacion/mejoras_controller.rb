@@ -1,4 +1,4 @@
-class MejorasController < ApplicationController
+class Aplicacion::MejorasController < ApplicationController
   before_action :authenticate_usuario!, except: :show
   before_action :inicia_sesion
   before_action :carga_temas_ayuda
