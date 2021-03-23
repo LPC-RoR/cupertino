@@ -47,16 +47,12 @@ module Cupertino
 
     config.look_app = {
         aplicacion: {
-            favicon: true,
-            banner: true,
+            favicon: false,
+            banner: false,
             nombre_aplicacion: 'ec',
-            home_link: 'http://www.cupertino.cl',
-            titulo_size: '1',
-            titulo_color: 'primary',
-            detalle_size: '6',
-            detalle_color: 'primary',
+            home_link: 'http://www.ec.cl',
             portada: {
-                active: true,
+                active: false,
                 size: nil,
                 clase: 'mx-auto d-block'
             },
@@ -69,7 +65,7 @@ module Cupertino
                 detalle_color: 'info'
             },
             foot: {
-                active: true,
+                active: false,
                 size: 'quarter',
                 clase: 'mx-auto d-block'
             },
@@ -79,7 +75,7 @@ module Cupertino
             }
         },
         navbar: {
-            color: 'info',
+            color: 'primary',
             logo: false,
             nomenu_controllers: [],
             item_contacto: true,

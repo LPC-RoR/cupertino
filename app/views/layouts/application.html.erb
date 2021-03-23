@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Cupertino</title>
+    <title><%=config_aplicacion(:nombre_aplicacion)%></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag asset_path('favicon.ico') if config_aplicacion(:favicon) %>
   </head>
 
   <body>
-    <%= yield %>
+    <!--            NAVBAR                     -->
+    <%= render partial: '0p/navbar/navbar' %>
+    <!--            CONTENIDO + MENU DERECHA   -->
+    <div class="container-fluid">
+      <%= yield %>          
+    </div>
+    <!------------------------------------------->
+    </br></br></br>
+    <% if config_foot(:active) %>
+      <%= render partial: '0help/tema_ayuda/0h_ilustracion', locals: {objeto: objeto_tema_ayuda('foot'), class_image: config_foot(:clase), size: config_foot(:size) } %>
+    <% end %>
+    </br></br></br>
   </body>
 </html>
