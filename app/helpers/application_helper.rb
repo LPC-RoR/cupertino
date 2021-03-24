@@ -181,9 +181,17 @@ module ApplicationHelper
 
 	## ------------------------------------------------------- FORM
 
+	def url_params(parametros)
+		params_options = "n_params=#{parametros.length}"
+		parametros.each_with_index do |obj, indice|
+			params_options = params_options+"&class_name#{indice+1}=#{obj.class.name}&obj_id#{indice+1}=#{obj.id}"
+		end
+		params_options
+	end
+
 	def detail_partial(controller)
 		if Rails.configuration.form[:detail_types_controller][:help].include?(controller)
-			"0help/#{controller.singularize}/detail"
+			"help/0help/#{controller.singularize}/detail"
 		elsif Rails.configuration.form[:detail_types_controller][:data].include?(controller)
 			"0data/#{controller.singularize}/detail"
 		elsif Rails.configuration.form[:detail_types_controller][:modelo].include?(controller)

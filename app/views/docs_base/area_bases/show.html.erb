@@ -1,0 +1,4 @@
+<%= render partial: '0p/general/o_titulo', locals: {o: @objeto, a: action_name, size: '5'} %>
+<%= render partial: '0p/general/titulo', locals: {c: 'documento_bases', a: nil, titulo: 'Documentos base', size: '5'} %>
+<%= render partial: '0p/tabla/solo_tabla', locals: {c: 'documento_bases', a: 'index'} %>
+<%#= render partial: '0p/form/inline_select_element', locals: {c: 'documento_bases', parametros: [@objeto], lista_seleccion: @documento_bases_seleccion, nombre_selector: 'documento_base'} %>

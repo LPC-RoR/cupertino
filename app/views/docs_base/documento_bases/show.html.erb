@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Orden:</strong>
+  <%= @documento_base.orden %>
+</p>
+
+<p>
+  <strong>Documento:</strong>
+  <%= @documento_base.documento %>
+</p>
+
+<p>
+  <strong>Area base:</strong>
+  <%= @documento_base.area_base_id %>
+</p>
+
+<%= link_to 'Edit', edit_documento_base_path(@documento_base) %> |
+<%= link_to 'Back', documento_bases_path %>

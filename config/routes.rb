@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   # SCOPE APLICACION
   scope module: 'aplicacion' do
     resources :administradores
@@ -27,6 +26,22 @@ Rails.application.routes.draw do
     end
   end
 
+  scope module: 'docs_base' do
+    resources :area_bases
+    resources :asignatura_bases
+    resources :curriculums
+    resources :nivel_bases do
+      match :inline_nuevo, via: :post, on: :collection
+      match :elimina_nivel_base, via: :get, on: :member
+      match :asigna_select_elemento, via: :post, on: :collection
+    end
+    resources :referencias
+    resources :requisitos
+    resources :documento_bases do
+      match :asigna_select_elemento, via: :post, on: :collection
+    end
+  end
+
   devise_for :usuarios, controllers: {
         confirmations: 'usuarios/confirmations',
 #        omniauth_callbacks: 'usuarios/omniauth_callbacks',
@@ -37,6 +52,6 @@ Rails.application.routes.draw do
       }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root 'recursos#home'
+  root 'aplicacion/recursos#home'
 
 end

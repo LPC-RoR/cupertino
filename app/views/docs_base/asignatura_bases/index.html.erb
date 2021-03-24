@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Asignatura Bases</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Asignatura</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @asignatura_bases.each do |asignatura_base| %>
+      <tr>
+        <td><%= asignatura_base.asignatura %></td>
+        <td><%= link_to 'Show', asignatura_base %></td>
+        <td><%= link_to 'Edit', edit_asignatura_base_path(asignatura_base) %></td>
+        <td><%= link_to 'Destroy', asignatura_base, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Asignatura Base', new_asignatura_base_path %>

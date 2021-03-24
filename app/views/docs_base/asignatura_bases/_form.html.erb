@@ -1,0 +1,22 @@
+<%= form_with(model: asignatura_base, local: true) do |form| %>
+  <% if asignatura_base.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(asignatura_base.errors.count, "error") %> prohibited this asignatura_base from being saved:</h2>
+
+      <ul>
+      <% asignatura_base.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :asignatura %>
+    <%= form.text_field :asignatura %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

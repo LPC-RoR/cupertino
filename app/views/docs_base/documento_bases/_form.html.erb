@@ -1,0 +1,32 @@
+<%= form_with(model: documento_base, local: true) do |form| %>
+  <% if documento_base.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(documento_base.errors.count, "error") %> prohibited this documento_base from being saved:</h2>
+
+      <ul>
+      <% documento_base.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :orden %>
+    <%= form.number_field :orden %>
+  </div>
+
+  <div class="field">
+    <%= form.label :documento %>
+    <%= form.text_field :documento %>
+  </div>
+
+  <div class="field">
+    <%= form.label :area_base_id %>
+    <%= form.number_field :area_base_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

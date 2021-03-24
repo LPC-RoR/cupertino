@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_23_154140) do
+ActiveRecord::Schema.define(version: 2021_03_24_032051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,20 @@ ActiveRecord::Schema.define(version: 2021_03_23_154140) do
     t.index ["email"], name: "index_administradores_on_email"
   end
 
+  create_table "area_bases", force: :cascade do |t|
+    t.integer "orden"
+    t.string "area_base"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["orden"], name: "index_area_bases_on_orden"
+  end
+
+  create_table "asignatura_bases", force: :cascade do |t|
+    t.string "asignatura_base"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "conversaciones", force: :cascade do |t|
     t.integer "parent_id"
     t.integer "child_id"
@@ -30,6 +44,25 @@ ActiveRecord::Schema.define(version: 2021_03_23_154140) do
     t.datetime "updated_at", null: false
     t.index ["child_id"], name: "index_conversaciones_on_child_id"
     t.index ["parent_id"], name: "index_conversaciones_on_parent_id"
+  end
+
+  create_table "curriculums", force: :cascade do |t|
+    t.integer "nivel_base_id"
+    t.integer "asignatura_base_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asignatura_base_id"], name: "index_curriculums_on_asignatura_base_id"
+    t.index ["nivel_base_id"], name: "index_curriculums_on_nivel_base_id"
+  end
+
+  create_table "documento_bases", force: :cascade do |t|
+    t.integer "orden"
+    t.string "documento_base"
+    t.integer "area_base_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["area_base_id"], name: "index_documento_bases_on_area_base_id"
+    t.index ["orden"], name: "index_documento_bases_on_orden"
   end
 
   create_table "mejoras", force: :cascade do |t|
@@ -58,6 +91,16 @@ ActiveRecord::Schema.define(version: 2021_03_23_154140) do
     t.index ["tipo"], name: "index_mensajes_on_tipo"
   end
 
+  create_table "nivel_bases", force: :cascade do |t|
+    t.integer "orden"
+    t.string "nivel_base"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "primer_nivel"
+    t.index ["orden"], name: "index_nivel_bases_on_orden"
+    t.index ["primer_nivel"], name: "index_nivel_bases_on_primer_nivel"
+  end
+
   create_table "observaciones", force: :cascade do |t|
     t.string "observacion"
     t.text "detalle"
@@ -83,6 +126,26 @@ ActiveRecord::Schema.define(version: 2021_03_23_154140) do
     t.datetime "updated_at", null: false
     t.index ["administrador_id"], name: "index_perfiles_on_administrador_id"
     t.index ["email"], name: "index_perfiles_on_email"
+  end
+
+  create_table "referencias", force: :cascade do |t|
+    t.integer "nivel_base_id"
+    t.integer "asignatura_base_id"
+    t.integer "documento_base_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asignatura_base_id"], name: "index_referencias_on_asignatura_base_id"
+    t.index ["documento_base_id"], name: "index_referencias_on_documento_base_id"
+    t.index ["nivel_base_id"], name: "index_referencias_on_nivel_base_id"
+  end
+
+  create_table "requisitos", force: :cascade do |t|
+    t.integer "parent_id"
+    t.integer "child_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_requisitos_on_child_id"
+    t.index ["parent_id"], name: "index_requisitos_on_parent_id"
   end
 
   create_table "tema_ayudas", force: :cascade do |t|

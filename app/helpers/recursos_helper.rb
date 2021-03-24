@@ -8,10 +8,9 @@ module RecursosHelper
     # se usa directamente en 0p/navbar/_navbar.html.erb
 	def menu
 	    [
-	        ['Áreas Base',      '/area_bases',                'usuario'],
-	        ["Documentos Base", "/documento_bases",           'usuario'],
-	        ["Administradores", "/administradores",             'admin'],
-	        ["Temas Ayuda",     "/tema_ayudas",                 'admin']
+	        ["Estructura Base", "/documento_bases",        'admin'],
+	        ["Administradores", "/administradores",        'admin'],
+	        ["Temas Ayuda",     "/tema_ayudas",            'admin']
 	    ]
 	end
 
@@ -41,24 +40,14 @@ module RecursosHelper
 
 	def crud_conditions(objeto, btn)
 		case objeto.class.name
-		when 'Carga'
-			objeto.estado == 'ingreso'
-		when 'Publicacion'
-			objeto.origen == 'ingreso'
-		when 'Carpeta'
-			not Carpeta::NOT_MODIFY.include?(objeto.carpeta) and controller_name == 'proyectos'
-		when 'Texto'
-			false
-		when 'Clasificacion'
-			false
-		when 'Tema'
-			['publicaciones', 'temas'].include?(controller_name)
-		when 'Proyecto'
-			controller_name == 'proyectos'
-		when 'Tabla'
-			controller_name == 'datos'
-		when 'Perfil'
-			false
+		when 'NivelBase'
+			btn == 'Editar' and controller_name == 'documento_bases'
+		when 'AreaBase'
+			controller_name == 'documento_bases'
+		when 'AsignaturaBase'
+			controller_name == 'documento_bases'
+		when 'DocumentoBase'
+			controller_name == 'documento_bases'
 		else
 			true
 		end
@@ -66,32 +55,8 @@ module RecursosHelper
 
 	def x_conditions(objeto, btn)
 		case objeto.class.name
-		when 'Carpeta'
-			case btn
-			when 'Desasignar'
-				controller_name == 'publicaciones' and (not Carpeta::NOT_MODIFY.include?(objeto.carpeta)) and action_name == 'show' and @coleccion['carpetas'].count > 1
-			when 'Eliminar'
-				controller_name == 'publicaciones' and (not Carpeta::NOT_MODIFY.include?(objeto.carpeta)) and action_name == 'show' and objeto.temas.empty? and @coleccion['carpetas'].count > 1
-			end
-		when 'Carga'
-			objeto.estado == 'ingreso'
-		when 'Texto'
-			controller_name == 'publicaciones'
-		when 'Clasificacion'
-			objeto.clasificacion != btn
-		when 'Tema'
-			case btn
-			when 'Desasignar'
-				controller_name == 'temas'
-			when 'Eliminar'
-				controller_name == 'temas' and objeto.textos.empty?
-			end
-		when 'Proyecto'
-			objeto.activo.blank? or objeto.activo == false
-		when 'Perfil'
-			controller_name == 'proyectos'
-		when 'Tabla'
-			objeto.archivo.present? and objeto.encabezados.empty?
+		when 'NivelBase'
+			objeto.children.empty?
 		else
 			true
 		end
@@ -99,33 +64,8 @@ module RecursosHelper
 
 	def x_btns(objeto)
 		case objeto.class.name
-		when 'Carpeta'
-			[
-				['Desasignar', '/desasigna_carpeta', true],
-				['Eliminar', '/elimina_carpeta', true]
-			]
-		when 'Carga'
-			[['Proceso', '/procesa_carga', false]]
-		when 'Texto'
-			[['Desasignar', '/desasignar', true]]
-		when 'Clasificacion'
-			[
-                ['referencia',     '/clasifica?clasificacion=referencia'    , true],
-                ['complementario', '/clasifica?clasificacion=complementario', true],
-                ['controversial',  '/clasifica?clasificacion=controversial' , true],
-                ['revisar',        '/clasifica?clasificacion=revisar'       , true]
-            ]
-        when 'Tema'
-        	[
-#        		['Desasignar', '/desasignar', true],
-        		['Eliminar', '/eliminar', true]
-        	]
-        when 'Proyecto'
-        	[['Activo', '/activo', false]]
-        when 'Perfil'
-        	[['Desvincular', '/desvincular', true]]
-        when 'Tabla'
-        	[['Cargar', '/cargar_tabla', true]]
+		when 'NivelBase'
+			[['Eliminar', '/elimina_nivel_base', false]]
         else
         	[]
 		end		
