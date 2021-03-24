@@ -15,15 +15,25 @@ class DocsBase::DocumentoBasesController < ApplicationController
 
   # GET /documento_bases/1 or /documento_bases/1.json
   def show
+    @nivel_bases_seleccion = NivelBase.where(id: (NivelBase.all.ids - @objeto.nivel_bases.ids))
+    @asignatura_bases_seleccion = AsignaturaBase.where(id: (AsignaturaBase.all.ids - @objeto.asignatura_bases.ids))
+
+    @coleccion = {}
+    @coleccion['nivel_bases'] = @objeto.nivel_bases.order(:orden)
+    @coleccion['asignatura_bases'] = @objeto.asignatura_bases.order(:asignatura_base)
+
+    @coleccion['item_bases'] = @objeto.item_bases.order(:orden)
   end
 
   # GET /documento_bases/new
   def new
+    @area_bases_select = AreaBase.all.order(:orden)
     @objeto = DocumentoBase.new
   end
 
   # GET /documento_bases/1/edit
   def edit
+    @area_bases_select = AreaBase.all.order(:orden)
   end
 
   # POST /documento_bases or /documento_bases.json
@@ -78,6 +88,6 @@ class DocsBase::DocumentoBasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def documento_base_params
-      params.require(:documento_base).permit(:orden, :documento, :area_base_id)
+      params.require(:documento_base).permit(:orden, :documento_base, :area_base_id, :link)
     end
 end

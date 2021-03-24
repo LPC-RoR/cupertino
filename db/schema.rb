@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_24_032051) do
+ActiveRecord::Schema.define(version: 2021_03_24_185552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,8 +61,19 @@ ActiveRecord::Schema.define(version: 2021_03_24_032051) do
     t.integer "area_base_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "link"
     t.index ["area_base_id"], name: "index_documento_bases_on_area_base_id"
     t.index ["orden"], name: "index_documento_bases_on_orden"
+  end
+
+  create_table "item_bases", force: :cascade do |t|
+    t.integer "orden"
+    t.string "item_base"
+    t.string "pagina"
+    t.integer "documento_base_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["documento_base_id"], name: "index_item_bases_on_documento_base_id"
   end
 
   create_table "mejoras", force: :cascade do |t|

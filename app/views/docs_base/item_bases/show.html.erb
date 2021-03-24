@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Orden:</strong>
+  <%= @item_base.orden %>
+</p>
+
+<p>
+  <strong>Item base:</strong>
+  <%= @item_base.item_base %>
+</p>
+
+<p>
+  <strong>Pagina:</strong>
+  <%= @item_base.pagina %>
+</p>
+
+<p>
+  <strong>Tipo:</strong>
+  <%= @item_base.tipo %>
+</p>
+
+<p>
+  <strong>Documento base:</strong>
+  <%= @item_base.documento_base_id %>
+</p>
+
+<%= link_to 'Edit', edit_item_base_path(@item_base) %> |
+<%= link_to 'Back', item_bases_path %>

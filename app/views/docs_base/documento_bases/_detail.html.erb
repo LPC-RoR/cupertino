@@ -1,0 +1,10 @@
+<%= form.select :area_base_id, @area_bases_select.collect { |area| [area.area_base, area.id] }, include_blank: false, prompt: "Seleccione Área" %></br>
+<small><%= form.label 'Orden | Documento Base' %></small></br>
+<div class='form-inline'>
+	<%= form.text_field(:orden, size: 5, class: 'form-control' ) %>
+	<%= form.text_field(:documento_base, size: 57, class: 'form-control' ) %>
+</div>
+<small><%= form.label 'link' %></small></br>
+<div class='form-inline'>
+<%= form.text_field(:link, size: 67, class: 'form-control' ) %>
+</div>

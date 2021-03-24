@@ -28,16 +28,22 @@ Rails.application.routes.draw do
 
   scope module: 'docs_base' do
     resources :area_bases
-    resources :asignatura_bases
+    resources :asignatura_bases do
+      match :asigna_select_elemento, via: :post, on: :collection
+      match :desasignar, via: :get, on: :member
+    end
     resources :curriculums
+    resources :item_bases
     resources :nivel_bases do
       match :inline_nuevo, via: :post, on: :collection
       match :elimina_nivel_base, via: :get, on: :member
       match :asigna_select_elemento, via: :post, on: :collection
+      match :desasignar, via: :get, on: :member
     end
     resources :referencias
     resources :requisitos
     resources :documento_bases do
+      resources :item_bases
       match :asigna_select_elemento, via: :post, on: :collection
     end
   end

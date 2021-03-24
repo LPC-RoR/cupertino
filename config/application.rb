@@ -49,7 +49,7 @@ module Cupertino
         aplicacion: {
             favicon: false,
             banner: false,
-            nombre_aplicacion: 'ec',
+            nombre_aplicacion: 'Cupertino',
             home_link: 'http://www.ec.cl',
             portada: {
                 active: false,
@@ -169,7 +169,7 @@ module Cupertino
         detail_types_controller: {
             help: ['mejoras', 'mensajes', 'observaciones', 'tema_ayudas', 'tutoriales', 'pasos'],
             data: ['especificaciones', 'tablas'],
-            modelo: ['publicaciones']
+            modelo: ['documento_bases']
         },
         conditional_fields: {
             'Publicacion' => [

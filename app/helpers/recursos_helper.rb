@@ -41,13 +41,13 @@ module RecursosHelper
 	def crud_conditions(objeto, btn)
 		case objeto.class.name
 		when 'NivelBase'
-			btn == 'Editar' and controller_name == 'documento_bases'
+			btn == 'Editar' and action_name == 'index'
 		when 'AreaBase'
-			controller_name == 'documento_bases'
+			action_name == 'index'
 		when 'AsignaturaBase'
-			controller_name == 'documento_bases'
+			action_name == 'index'
 		when 'DocumentoBase'
-			controller_name == 'documento_bases'
+			action_name == 'index'
 		else
 			true
 		end
@@ -56,7 +56,14 @@ module RecursosHelper
 	def x_conditions(objeto, btn)
 		case objeto.class.name
 		when 'NivelBase'
-			objeto.children.empty?
+			case btn
+			when 'Eliminar'
+				objeto.children.empty? and controller_name == 'documento_bases' and action_name == 'index'
+			when 'Desasignar'
+				action_name == 'show'
+			end
+		when 'AsignaturaBase'
+			action_name == 'show'
 		else
 			true
 		end
@@ -65,7 +72,12 @@ module RecursosHelper
 	def x_btns(objeto)
 		case objeto.class.name
 		when 'NivelBase'
-			[['Eliminar', '/elimina_nivel_base', false]]
+			[
+				['Eliminar', '/elimina_nivel_base', false],
+				['Desasignar', '/desasignar', true]
+			]
+		when 'AsignaturaBase'
+			[['Desasignar', '/desasignar', true]]
         else
         	[]
 		end		
@@ -81,6 +93,14 @@ module RecursosHelper
 	end
 
 	## ------------------------------------------------------- FORM & SHOW
+
+	def detail_controller_path(controller)
+		if ['documento_bases'].include?(controller)
+			"docs_base/#{controller}/detail"
+		else
+			"#{controller}/detail"
+		end
+	end
 
 	# apoyo de filtro_condicional_field? (abajo)
 	def get_field_condition(objeto, field)

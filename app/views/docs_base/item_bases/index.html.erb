@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Item Bases</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Orden</th>
+      <th>Item base</th>
+      <th>Pagina</th>
+      <th>Tipo</th>
+      <th>Documento base</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @item_bases.each do |item_base| %>
+      <tr>
+        <td><%= item_base.orden %></td>
+        <td><%= item_base.item_base %></td>
+        <td><%= item_base.pagina %></td>
+        <td><%= item_base.tipo %></td>
+        <td><%= item_base.documento_base_id %></td>
+        <td><%= link_to 'Show', item_base %></td>
+        <td><%= link_to 'Edit', edit_item_base_path(item_base) %></td>
+        <td><%= link_to 'Destroy', item_base, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Item Base', new_item_base_path %>

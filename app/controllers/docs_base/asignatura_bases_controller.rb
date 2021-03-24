@@ -2,7 +2,7 @@ class DocsBase::AsignaturaBasesController < ApplicationController
   before_action :authenticate_usuario!
   before_action :inicia_sesion
   before_action :carga_temas_ayuda
-  before_action :set_asignatura_base, only: %i[ show edit update destroy ]
+  before_action :set_asignatura_base, only: %i[ show edit update destroy desasignar ]
 
   # GET /asignatura_bases or /asignatura_bases.json
   def index
@@ -56,6 +56,33 @@ class DocsBase::AsignaturaBasesController < ApplicationController
         format.json { render json: @objeto.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def asigna_select_elemento
+    case params[:class_name1]
+    when 'DocumentoBase'
+      @objeto = DocumentoBase.find(params[:obj_id1])
+    end
+
+    unless params[:objeto_base][:objeto_id].blank?
+      nuevo_elemento = AsignaturaBase.find(params[:objeto_base][:objeto_id])
+      @objeto.asignatura_bases << nuevo_elemento
+    end
+
+    redirect_to @objeto
+  end
+
+  def desasignar
+    case params[:class_name]
+    when 'DocumentoBase'
+      elemento = DocumentoBase.find(params[:objeto_id])
+      @objeto.documento_bases.delete(elemento)
+    when 'NivelBase'
+      elemento = NivelBase.find(params[:objeto_id])
+      @objeto.nivel_bases.delete(elemento)
+    end
+
+    redirect_to elemento
   end
 
   # DELETE /asignatura_bases/1 or /asignatura_bases/1.json

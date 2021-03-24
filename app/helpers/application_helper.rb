@@ -195,7 +195,7 @@ module ApplicationHelper
 		elsif Rails.configuration.form[:detail_types_controller][:data].include?(controller)
 			"0data/#{controller.singularize}/detail"
 		elsif Rails.configuration.form[:detail_types_controller][:modelo].include?(controller)
-			"#{controller}/detail"
+			detail_controller_path(controller)
 		else
 			'0p/form/detail'
 		end

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  orden: 1
+  item_base: MyString
+  pagina: MyString
+  tipo: MyString
+  documento_base_id: 1
+
+two:
+  orden: 1
+  item_base: MyString
+  pagina: MyString
+  tipo: MyString
+  documento_base_id: 1

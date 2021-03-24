@@ -2,7 +2,7 @@ class DocsBase::NivelBasesController < ApplicationController
   before_action :authenticate_usuario!
   before_action :inicia_sesion
   before_action :carga_temas_ayuda
-  before_action :set_nivel_base, only: %i[ show edit update destroy elimina_nivel_base ]
+  before_action :set_nivel_base, only: %i[ show edit update destroy elimina_nivel_base desasignar ]
 
   # GET /nivel_bases or /nivel_bases.json
   def index
@@ -69,12 +69,29 @@ class DocsBase::NivelBasesController < ApplicationController
     case params[:class_name1]
     when 'AsignaturaBase'
       @objeto = AsignaturaBase.find(params[:obj_id1])
-      unless params[:objeto_base][:objeto_id].blank?
-        nivel_base = NivelBase.find(params[:objeto_base][:objeto_id])
-        @objeto.nivel_bases << nivel_base
-      end
+    when 'DocumentoBase'
+      @objeto = DocumentoBase.find(params[:obj_id1])
     end
+
+    unless params[:objeto_base][:objeto_id].blank?
+      nivel_base = NivelBase.find(params[:objeto_base][:objeto_id])
+      @objeto.nivel_bases << nivel_base
+    end
+
     redirect_to @objeto
+  end
+
+  def desasignar
+    case params[:class_name]
+    when 'AsignaturaBase'
+      elemento = AsignaturaBase.find(params[:objeto_id])
+      @objeto.asignatura_bases.delete(elemento)
+    when 'DocumentoBase'
+      elemento = DocumentoBase.find(params[:objeto_id])
+      @objeto.documento_bases.delete(elemento)
+    end
+
+    redirect_to elemento
   end
 
   # DELETE /nivel_bases/1 or /nivel_bases/1.json
