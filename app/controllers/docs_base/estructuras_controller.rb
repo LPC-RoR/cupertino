@@ -6,10 +6,21 @@ class DocsBase::EstructurasController < ApplicationController
 
   # GET /estructuras or /estructuras.json
   def index
+
+    if params[:html_options].blank?
+      @tab = CurriculumBase.all.order(:orden).first.curriculum_base
+    else
+      @tab = params[:html_options][:tab].blank? ? CurriculumBase.all.order(:orden).first.curriculum_base : params[:html_options][:tab]
+    end
+    @options = {'tab' => @tab}
+
+    @curriculum_base = CurriculumBase.find_by(curriculum_base: @tab)
+
     @coleccion = {}
+    @coleccion['curriculum_bases'] = CurriculumBase.all.order(:orden)
     @coleccion['area_bases']       = AreaBase.all.order(:orden)
-    @coleccion['nivel_bases']      = NivelBase.all.order(:orden)
-    @coleccion['asignatura_bases'] = AsignaturaBase.all.order(:asignatura_base)
+    @coleccion['nivel_bases']      = @curriculum_base.nivel_bases.order(:orden)
+    @coleccion['asignatura_bases'] = @curriculum_base.asignatura_bases.order(:asignatura_base)
   end
 
   # GET /estructuras/1 or /estructuras/1.json

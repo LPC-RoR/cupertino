@@ -19,7 +19,7 @@ class DocsBase::NivelBasesController < ApplicationController
 
   # GET /nivel_bases/new
   def new
-    @objeto = NivelBase.new
+    @objeto = NivelBase.new(curriculum_base_id: params[:curriculum_base_id])
   end
 
   def inline_nuevo
@@ -111,7 +111,7 @@ class DocsBase::NivelBasesController < ApplicationController
 
     @objeto.delete
 
-    redirect_to documento_bases_path
+    redirect_to estructuras_path
   end
 
   private
@@ -121,11 +121,11 @@ class DocsBase::NivelBasesController < ApplicationController
     end
 
     def set_redireccion
-      @redireccion = estructuras_path
+      @redireccion = @objeto.curriculum_base
     end
 
     # Only allow a list of trusted parameters through.
     def nivel_base_params
-      params.require(:nivel_base).permit(:orden, :nivel_base, :primer_nivel)
+      params.require(:nivel_base).permit(:orden, :nivel_base, :primer_nivel, :curriculum_base_id)
     end
 end

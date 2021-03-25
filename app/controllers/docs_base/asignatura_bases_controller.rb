@@ -11,8 +11,8 @@ class DocsBase::AsignaturaBasesController < ApplicationController
 
   # GET /asignatura_bases/1 or /asignatura_bases/1.json
   def show
-    @nivel_bases_seleccion = NivelBase.where(id: (NivelBase.all.ids - @objeto.nivel_bases.ids)).order(:orden)
-    @documento_bases_seleccion = DocumentoBase.where(id: (DocumentoBase.all.ids - @objeto.documento_bases.ids)).order(:documento_base)
+    @nivel_bases_seleccion = NivelBase.where(id: (@objeto.curriculum_base.nivel_bases.ids - @objeto.nivel_bases.ids)).order(:orden)
+#    @documento_bases_seleccion = DocumentoBase.where(id: (@objeto.curriculum_base.documento_bases.ids - @objeto.documento_bases.ids)).order(:documento_base)
 
     @coleccion = {}
     @coleccion['nivel_bases'] = @objeto.nivel_bases.order(:orden)
@@ -21,7 +21,7 @@ class DocsBase::AsignaturaBasesController < ApplicationController
 
   # GET /asignatura_bases/new
   def new
-    @objeto = AsignaturaBase.new
+    @objeto = AsignaturaBase.new(curriculum_base_id: params[:curriculum_base_id])
   end
 
   # GET /asignatura_bases/1/edit
@@ -102,11 +102,11 @@ class DocsBase::AsignaturaBasesController < ApplicationController
     end
 
     def set_redireccion
-      @redireccion = estructuras_path
+      @redireccion = @objeto.curriculum_base
     end
 
     # Only allow a list of trusted parameters through.
     def asignatura_base_params
-      params.require(:asignatura_base).permit(:asignatura_base, :detalle)
+      params.require(:asignatura_base).permit(:asignatura_base, :detalle, :curriculum_base_id)
     end
 end

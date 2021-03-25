@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_25_013725) do
+ActiveRecord::Schema.define(version: 2021_03_25_164207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 2021_03_25_013725) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "detalle"
+    t.integer "curriculum_base_id"
+    t.index ["curriculum_base_id"], name: "index_asignatura_bases_on_curriculum_base_id"
   end
 
   create_table "conversaciones", force: :cascade do |t|
@@ -45,6 +47,14 @@ ActiveRecord::Schema.define(version: 2021_03_25_013725) do
     t.datetime "updated_at", null: false
     t.index ["child_id"], name: "index_conversaciones_on_child_id"
     t.index ["parent_id"], name: "index_conversaciones_on_parent_id"
+  end
+
+  create_table "curriculum_bases", force: :cascade do |t|
+    t.integer "orden"
+    t.string "curriculum_base"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["orden"], name: "index_curriculum_bases_on_orden"
   end
 
   create_table "curriculums", force: :cascade do |t|
@@ -109,6 +119,8 @@ ActiveRecord::Schema.define(version: 2021_03_25_013725) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "primer_nivel"
+    t.integer "curriculum_base_id"
+    t.index ["curriculum_base_id"], name: "index_nivel_bases_on_curriculum_base_id"
     t.index ["orden"], name: "index_nivel_bases_on_orden"
     t.index ["primer_nivel"], name: "index_nivel_bases_on_primer_nivel"
   end

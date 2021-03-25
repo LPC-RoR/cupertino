@@ -6,10 +6,13 @@ class NivelBase < ApplicationRecord
 
 	# -------------------- FORM  -----------------------
  	FORM_FIELDS = [
- 		['orden',        'entry'],
-		['nivel_base',   'entry'],
-		['primer_nivel', 'check_box']
+ 		['orden',               'entry'],
+		['nivel_base',          'entry'],
+		['primer_nivel',    'check_box'],
+		['curriculum_base_id', 'hidden']
 	]
+
+	belongs_to :curriculum_base
 
 	has_one  :parent_relation, :foreign_key => "child_id", :class_name => "Requisito"
 	has_many :child_relations, :foreign_key => "parent_id", :class_name => "Requisito"

@@ -42,11 +42,11 @@ module RecursosHelper
 	def crud_conditions(objeto, btn)
 		case objeto.class.name
 		when 'NivelBase'
-			btn == 'Editar' and action_name == 'index'
+			btn == 'Editar' and controller_name == 'curriculum_bases'
 		when 'AreaBase'
 			action_name == 'index'
 		when 'AsignaturaBase'
-			action_name == 'index'
+			controller_name == 'curriculum_bases'
 		when 'DocumentoBase'
 			action_name == 'index'
 		else
@@ -59,12 +59,12 @@ module RecursosHelper
 		when 'NivelBase'
 			case btn
 			when 'Eliminar'
-				objeto.children.empty? and controller_name == 'estructuras'
+				objeto.children.empty? and controller_name == 'curriculum_bases'
 			when 'Desasignar'
-				controller_name != 'nivel_bases' and action_name == 'show'
+				(not ['nivel_bases', 'curriculum_bases'].include?(controller_name)) and action_name == 'show'
 			end
 		when 'AsignaturaBase'
-			action_name == 'show'
+			not ['estructura_bases', 'curriculum_bases'].include?(controller_name)
 		else
 			true
 		end
