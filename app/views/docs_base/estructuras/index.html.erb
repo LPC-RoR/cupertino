@@ -15,13 +15,17 @@
 <%= render partial: '0p/tabs/tabs', locals: {tabs: CurriculumBase.all.order(:orden).map {|cb| cb.curriculum_base}, tag: 'tab', active: @tab} %>
 <div class='row'>
   <div class='col-md-6'>
-    <%= render partial: '0p/general/titulo', locals: {c: 'nivel_bases', a: nil, titulo: 'Niveles base', size: '5'} %>
-    <%= render partial: '0p/tabla/solo_tabla', locals: {c: 'nivel_bases', a: 'index'} %>
-    <%= render partial: '0p/tabla/inline_btn_nuevo', locals: {o: @curriculum_base, c: 'nivel_bases'} %>
+    <% unless @coleccion['nivel_bases'].blank? %>
+      <%= render partial: '0p/general/titulo', locals: {c: 'nivel_bases', a: nil, titulo: 'Niveles base', size: '5'} %>
+      <%= render partial: '0p/tabla/solo_tabla', locals: {c: 'nivel_bases', a: 'index'} %>
+      <%= render partial: '0p/tabla/inline_btn_nuevo', locals: {o: @curriculum_base, c: 'nivel_bases'} %>
+    <% end %>
   </div>
   <div class='col-md-6'>
-    <%= render partial: '0p/general/titulo', locals: {c: 'asignatura_bases', a: nil, titulo: 'Asignaturas base', size: '5'} %>
-    <%= render partial: '0p/tabla/solo_tabla', locals: {c: 'asignatura_bases', a: 'index'} %>
-    <%= render partial: '0p/tabla/inline_btn_nuevo', locals: {o: @curriculum_base, c: 'asignatura_bases'} %>
+    <% unless @coleccion['asignatura_bases'].blank? %>
+      <%= render partial: '0p/general/titulo', locals: {c: 'asignatura_bases', a: nil, titulo: 'Asignaturas base', size: '5'} %>
+      <%= render partial: '0p/tabla/solo_tabla', locals: {c: 'asignatura_bases', a: 'index'} %>
+      <%= render partial: '0p/tabla/inline_btn_nuevo', locals: {o: @curriculum_base, c: 'asignatura_bases'} %>
+    <% end %>
   </div>
 </div>

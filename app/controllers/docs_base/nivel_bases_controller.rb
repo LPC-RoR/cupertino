@@ -111,7 +111,7 @@ class DocsBase::NivelBasesController < ApplicationController
 
     @objeto.delete
 
-    redirect_to estructuras_path
+    redirect_to @objeto.curriculum_base
   end
 
   private

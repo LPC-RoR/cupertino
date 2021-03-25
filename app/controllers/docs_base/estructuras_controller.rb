@@ -7,10 +7,12 @@ class DocsBase::EstructurasController < ApplicationController
   # GET /estructuras or /estructuras.json
   def index
 
+    curriculum_base_w_default = CurriculumBase.all.empty? ? 'vacio' : CurriculumBase.all.order(:orden).first.curriculum_base
+
     if params[:html_options].blank?
-      @tab = CurriculumBase.all.order(:orden).first.curriculum_base
+      @tab = curriculum_base_w_default
     else
-      @tab = params[:html_options][:tab].blank? ? CurriculumBase.all.order(:orden).first.curriculum_base : params[:html_options][:tab]
+      @tab = params[:html_options][:tab].blank? ? curriculum_base_w_default : params[:html_options][:tab]
     end
     @options = {'tab' => @tab}
 
@@ -19,8 +21,8 @@ class DocsBase::EstructurasController < ApplicationController
     @coleccion = {}
     @coleccion['curriculum_bases'] = CurriculumBase.all.order(:orden)
     @coleccion['area_bases']       = AreaBase.all.order(:orden)
-    @coleccion['nivel_bases']      = @curriculum_base.nivel_bases.order(:orden)
-    @coleccion['asignatura_bases'] = @curriculum_base.asignatura_bases.order(:asignatura_base)
+    @coleccion['nivel_bases']      = @curriculum_base.blank? ? nil : @curriculum_base.nivel_bases.order(:orden)
+    @coleccion['asignatura_bases'] = @curriculum_base.blank? ? nil : @curriculum_base.asignatura_bases.order(:asignatura_base)
   end
 
   # GET /estructuras/1 or /estructuras/1.json
