@@ -1,0 +1,17 @@
+<%= form_with(model: estructura, local: true) do |form| %>
+  <% if estructura.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(estructura.errors.count, "error") %> prohibited this estructura from being saved:</h2>
+
+      <ul>
+      <% estructura.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

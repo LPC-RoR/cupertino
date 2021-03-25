@@ -8,9 +8,10 @@ module RecursosHelper
     # se usa directamente en 0p/navbar/_navbar.html.erb
 	def menu
 	    [
-	        ["Estructura Base", "/documento_bases",        'admin'],
-	        ["Administradores", "/administradores",        'admin'],
-	        ["Temas Ayuda",     "/tema_ayudas",            'admin']
+	        ["Estructura Base", "/estructuras",        'admin'],
+	        ["Documentos",      "/documento_bases",    'admin'],
+	        ["Administradores", "/administradores",    'admin'],
+	        ["Temas Ayuda",     "/tema_ayudas",        'admin']
 	    ]
 	end
 
@@ -58,7 +59,7 @@ module RecursosHelper
 		when 'NivelBase'
 			case btn
 			when 'Eliminar'
-				objeto.children.empty? and controller_name == 'documento_bases' and action_name == 'index'
+				objeto.children.empty? and controller_name == 'estructuras'
 			when 'Desasignar'
 				controller_name != 'nivel_bases' and action_name == 'show'
 			end

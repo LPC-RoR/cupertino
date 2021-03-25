@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       match :desasignar, via: :get, on: :member
     end
     resources :curriculums
+    resources :estructuras
     resources :item_bases
     resources :nivel_bases do
       match :inline_nuevo, via: :post, on: :collection

@@ -1,8 +1,8 @@
 class DocumentoBase < ApplicationRecord
 	TABLA_FIELDS = [
 		['orden',        'normal'],
-		['documento_base', 'show'],
-		['link',           'link']
+		['documento_base', 'show_link']
+#		['link',           'link']
 	]
 
 	# -------------------- FORM  -----------------------

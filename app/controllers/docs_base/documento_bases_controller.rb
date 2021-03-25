@@ -6,11 +6,16 @@ class DocsBase::DocumentoBasesController < ApplicationController
 
   # GET /documento_bases or /documento_bases.json
   def index
+    areas_base = AreaBase.all.order(:orden)
+    @list_selector = areas_base.map {|area| [area.area_base, area.documento_bases.count]}
+
+    area_base = params[:html_options].blank? ? areas_base.first : (params[:html_options]['sel'].blank? ? areas_base.first : AreaBase.find_by(area_base: params[:html_options]['sel']))
+
+    @sel = area_base.area_base
+    @options = {'sel' => @sel}
+
     @coleccion = {}
-    @coleccion['area_bases']       = AreaBase.all.order(:orden)
-    @coleccion['nivel_bases']      = NivelBase.all.order(:orden)
-    @coleccion['documento_bases']  = DocumentoBase.all.order(:orden)
-    @coleccion['asignatura_bases'] = AsignaturaBase.all.order(:asignatura_base)
+    @coleccion[controller_name] = area_base.documento_bases.order(:orden)
   end
 
   # GET /documento_bases/1 or /documento_bases/1.json
