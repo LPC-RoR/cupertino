@@ -60,7 +60,7 @@ module RecursosHelper
 			when 'Eliminar'
 				objeto.children.empty? and controller_name == 'documento_bases' and action_name == 'index'
 			when 'Desasignar'
-				action_name == 'show'
+				controller_name != 'nivel_bases' and action_name == 'show'
 			end
 		when 'AsignaturaBase'
 			action_name == 'show'

@@ -27,7 +27,6 @@ class DocsBase::DocumentoBasesController < ApplicationController
 
   # GET /documento_bases/new
   def new
-    @area_bases_select = AreaBase.all.order(:orden)
     @objeto = DocumentoBase.new
   end
 

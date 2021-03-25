@@ -1,4 +1,4 @@
-<%= form.select :area_base_id, @area_bases_select.collect { |area| [area.area_base, area.id] }, include_blank: false, prompt: "Seleccione Área" %></br>
+<%= form.select :area_base_id, AreaBase.all.order(:orden).collect { |area| [area.area_base, area.id] }, include_blank: false, prompt: "Seleccione Área" %></br>
 <small><%= form.label 'Orden | Documento Base' %></small></br>
 <div class='form-inline'>
 	<%= form.text_field(:orden, size: 5, class: 'form-control' ) %>

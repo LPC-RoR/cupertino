@@ -6,7 +6,8 @@ class AsignaturaBase < ApplicationRecord
 
 	# -------------------- FORM  -----------------------
  	FORM_FIELDS = [
-		['asignatura_base', 'entry']
+		['asignatura_base', 'entry'],
+		['detalle',     'text_area']
 	]
 
 	has_many :curriculums
@@ -14,4 +15,8 @@ class AsignaturaBase < ApplicationRecord
 
 	has_many :referencias
 	has_many :documento_bases, through: :referencias
+
+	def d_detalle
+	  self.detalle.blank? ? '' : self.detalle.gsub(/\n/, '<br>')
+	end
 end
