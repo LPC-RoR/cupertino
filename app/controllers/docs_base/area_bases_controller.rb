@@ -72,7 +72,7 @@ class DocsBase::AreaBasesController < ApplicationController
     end
 
     def set_redireccion
-      @redireccion = documento_bases_path
+      @redireccion = estructuras_path
     end
 
     # Only allow a list of trusted parameters through.
