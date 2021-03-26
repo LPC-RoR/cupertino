@@ -11,6 +11,8 @@ class DocsBase::NivelBasesController < ApplicationController
 
   # GET /nivel_bases/1 or /nivel_bases/1.json
   def show
+    @asignatura_bases_seleccion = AsignaturaBase.where(id: (AsignaturaBase.all.ids - @objeto.asignatura_bases.ids))
+
     @coleccion = {}
     @coleccion['nivel_bases'] = @objeto.children
     @coleccion['asignatura_bases'] = @objeto.asignatura_bases.order(:asignatura_base)

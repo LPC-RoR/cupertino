@@ -59,7 +59,8 @@ module RecursosHelper
 		when 'NivelBase'
 			case btn
 			when 'Eliminar'
-				objeto.children.empty? and controller_name == 'curriculum_bases'
+				false
+#				objeto.children.empty? and controller_name == 'curriculum_bases'
 			when 'Desasignar'
 				(not ['nivel_bases', 'curriculum_bases'].include?(controller_name)) and action_name == 'show'
 			end

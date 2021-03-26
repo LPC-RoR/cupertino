@@ -62,6 +62,8 @@ class DocsBase::AsignaturaBasesController < ApplicationController
     case params[:class_name1]
     when 'DocumentoBase'
       @objeto = DocumentoBase.find(params[:obj_id1])
+    when 'NivelBase'
+      @objeto = NivelBase.find(params[:obj_id1])
     end
 
     unless params[:objeto_base][:objeto_id].blank?

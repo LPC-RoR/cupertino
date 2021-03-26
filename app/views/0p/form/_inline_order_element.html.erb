@@ -3,8 +3,8 @@
 
 	<small><%= form.label "Orden | #{c.humanize.singularize}" %></small></br>
 	<div class='form-inline'>
-		<%= form.text_field(:orden, size: 5, class: 'form-control' ) %>
-		<%= form.text_field(:objeto, size: 57, class: 'form-control' ) %>
+		<%= form.text_field(:orden, size: order_size, class: 'form-control' ) %>
+		<%= form.text_field(:objeto, size: objeto_size, class: 'form-control' ) %>
 	</div>
 
 	<% if detalle %>

@@ -1,15 +1,16 @@
 <%= render partial: '0p/general/o_titulo', locals: {o: @objeto, a: action_name, size: '5'} %>
 <div class='row'>
-	<div class='col-md-6'>
+	<div class='col-md-4'>
 	    <%= render partial: '0p/general/titulo', locals: {c: 'nivel_bases', a: nil, titulo: 'Siguiente Nivel', size: '5'} %>
 		<%= render partial: '0p/tabla/solo_tabla', locals: {c: 'nivel_bases', a: 'index'} %>
-		<%= render partial: '0p/form/inline_order_element', locals: {c: 'nivel_bases', parametros: [@objeto], detalle: false} %>
+		<%= render partial: '0p/form/inline_order_element', locals: {c: 'nivel_bases', parametros: [@objeto], detalle: false, order_size: 3, objeto_size: 34} %>
 	</div>
-	<div class='col-md-3'>
+	<div class='col-md-4'>
 	    <%= render partial: '0p/general/titulo', locals: {c: 'asignatura_bases', a: nil, titulo: 'Asignaturas Base', size: '5'} %>
 		<%= render partial: '0p/tabla/solo_tabla', locals: {c: 'asignatura_bases', a: 'index'} %>
+		<%= render partial: '0p/form/inline_select_element', locals: {c: 'asignatura_bases', parametros: [@objeto], lista_seleccion: @asignatura_bases_seleccion, nombre_selector: 'asignatura_base'} %>
 	</div>
-	<div class='col-md-3'>
+	<div class='col-md-4'>
 	    <%= render partial: '0p/general/titulo', locals: {c: 'documento_bases', a: nil, titulo: 'Documentos Base', size: '5'} %>
 		<%= render partial: '0p/tabla/solo_tabla', locals: {c: 'documento_bases', a: 'index'} %>
 	</div>
