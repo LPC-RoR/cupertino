@@ -79,6 +79,6 @@ class DocsBase::TipoAsignaturaBasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tipo_asignatura_base_params
-      params.require(:tipo_asignatura_base).permit(:orden, :tipo_asignatura_base_id, :curriculum_base_id)
+      params.require(:tipo_asignatura_base).permit(:orden, :tipo_asignatura_base, :curriculum_base_id)
     end
 end
