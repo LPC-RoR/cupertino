@@ -100,6 +100,9 @@ class DocsBase::NivelBasesController < ApplicationController
     when 'NivelBase'
       elemento = NivelBase.find(params[:objeto_id])
       elemento.children.delete(@objeto)
+    when 'TipoAsignaturaBase'
+      elemento = TipoAsignaturaBase.find(params[:objeto_id])
+      @objeto.tipo_asignatura_bases.delete(elemento)
     end
 
     redirect_to elemento
