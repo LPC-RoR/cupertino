@@ -22,6 +22,7 @@ class DocsBase::EstructurasController < ApplicationController
     @coleccion['curriculum_bases'] = CurriculumBase.all.order(:orden)
     @coleccion['area_bases']       = AreaBase.all.order(:orden)
     @coleccion['nivel_bases']      = @curriculum_base.blank? ? nil : @curriculum_base.nivel_bases.order(:orden)
+    @coleccion['tipo_asignatura_bases'] = @curriculum_base.blank? ? nil : @curriculum_base.tipo_asignatura_bases.order(:orden)
     @coleccion['asignatura_bases'] = @curriculum_base.blank? ? nil : @curriculum_base.asignatura_bases.order(:asignatura_base)
   end
 

@@ -11,11 +11,11 @@ class DocsBase::NivelBasesController < ApplicationController
 
   # GET /nivel_bases/1 or /nivel_bases/1.json
   def show
-    @asignatura_bases_seleccion = AsignaturaBase.where(id: (AsignaturaBase.all.ids - @objeto.asignatura_bases.ids))
+    @nivel_bases_seleccion = NivelBase.where(id: (@objeto.curriculum_base.nivel_bases.ids - @objeto.children.ids)).order(:orden)
 
     @coleccion = {}
     @coleccion['nivel_bases'] = @objeto.children
-    @coleccion['asignatura_bases'] = @objeto.asignatura_bases.order(:asignatura_base)
+    @coleccion['asignatura_nivel_bases'] = @objeto.asignatura_nivel_bases
     @coleccion['documento_bases'] = @objeto.documento_bases.order(:documento_base)
   end
 
@@ -69,15 +69,21 @@ class DocsBase::NivelBasesController < ApplicationController
 
   def asigna_select_elemento
     case params[:class_name1]
-    when 'AsignaturaBase'
-      @objeto = AsignaturaBase.find(params[:obj_id1])
     when 'DocumentoBase'
       @objeto = DocumentoBase.find(params[:obj_id1])
+    when 'TipoAsignaturaBase'
+      @objeto = TipoAsignaturaBase.find(params[:obj_id1])
+    when 'NivelBase'
+      @objeto = NivelBase.find(params[:obj_id1])
     end
 
     unless params[:objeto_base][:objeto_id].blank?
       nivel_base = NivelBase.find(params[:objeto_base][:objeto_id])
-      @objeto.nivel_bases << nivel_base
+      if params[:class_name1] == 'NivelBase'
+        @objeto.children << nivel_base
+      else
+        @objeto.nivel_bases << nivel_base
+      end
     end
 
     redirect_to @objeto
@@ -91,9 +97,37 @@ class DocsBase::NivelBasesController < ApplicationController
     when 'DocumentoBase'
       elemento = DocumentoBase.find(params[:objeto_id])
       @objeto.documento_bases.delete(elemento)
+    when 'NivelBase'
+      elemento = NivelBase.find(params[:objeto_id])
+      elemento.children.delete(@objeto)
     end
 
     redirect_to elemento
+  end
+
+  def crea_asignatura_nivel
+    asignatura_base = AsignaturaBase.find(params[:obj_id1])
+    unless params[:objeto_base][:objeto_id].blank?
+      nivel_base = NivelBase.find(params[:objeto_base][:objeto_id])
+
+      case asignatura_base.alcance
+      when 'nivel'
+        se_procesa = (not asignatura_base.asignatura_nivel_bases.map {|anb| anb.nivel_bases.ids.include?(nivel_base.id)}.include?(true))
+      when 'multinivel'
+        se_procesa = (asignatura_base.asignatura_nivel_bases.empty? or (not asignatura_base.asignatura_nivel_bases.first.nivel_bases.ids.include?(nivel_base.id)))
+      end
+
+      if se_procesa
+        if asignatura_base.alcance == 'multinivel' and asignatura_base.asignatura_nivel_bases.any?
+          asignatura_nivel_base = asignatura_base.asignatura_nivel_bases.first
+        else
+          asignatura_nivel_base = asignatura_base.asignatura_nivel_bases.create()
+        end
+        asignatura_nivel_base.nivel_bases << nivel_base
+      end
+    end
+
+    redirect_to asignatura_base
   end
 
   # DELETE /nivel_bases/1 or /nivel_bases/1.json

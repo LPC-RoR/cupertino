@@ -21,7 +21,8 @@ class NivelBase < ApplicationRecord
 	has_many :children, :through => :child_relations, :source => :child
 
 	has_many :curriculums
-	has_many :asignatura_bases, through: :curriculums
+	has_many :asignatura_nivel_bases, through: :curriculums
+	has_many :tipo_asignatura_bases, through: :curriculums
 
 	has_many :referencias
 	has_many :documento_bases, through: :referencias

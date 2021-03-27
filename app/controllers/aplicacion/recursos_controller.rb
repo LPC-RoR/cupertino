@@ -8,7 +8,11 @@ class Aplicacion::RecursosController < ApplicationController
     @coleccion['tema_ayudas'] = TemaAyuda.where(tipo: 'inicio').order(:orden)
   end
 
-  def borrar_archivos
+  def procesos
+    NivelBase.delete_all
+    Curriculum.delete_all
+
+    redirect_to root
   end
 
   private

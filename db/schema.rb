@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_25_164207) do
+ActiveRecord::Schema.define(version: 2021_03_27_184924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,20 @@ ActiveRecord::Schema.define(version: 2021_03_25_164207) do
     t.datetime "updated_at", null: false
     t.text "detalle"
     t.integer "curriculum_base_id"
+    t.integer "tipo_asignatura_base_id"
+    t.string "tipo"
+    t.string "alcance"
+    t.index ["alcance"], name: "index_asignatura_bases_on_alcance"
     t.index ["curriculum_base_id"], name: "index_asignatura_bases_on_curriculum_base_id"
+    t.index ["tipo"], name: "index_asignatura_bases_on_tipo"
+    t.index ["tipo_asignatura_base_id"], name: "index_asignatura_bases_on_tipo_asignatura_base_id"
+  end
+
+  create_table "asignatura_nivel_bases", force: :cascade do |t|
+    t.integer "asignatura_base_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asignatura_base_id"], name: "index_asignatura_nivel_bases_on_asignatura_base_id"
   end
 
   create_table "conversaciones", force: :cascade do |t|
@@ -59,11 +72,13 @@ ActiveRecord::Schema.define(version: 2021_03_25_164207) do
 
   create_table "curriculums", force: :cascade do |t|
     t.integer "nivel_base_id"
-    t.integer "asignatura_base_id"
+    t.integer "asignatura_nivel_base_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["asignatura_base_id"], name: "index_curriculums_on_asignatura_base_id"
+    t.integer "tipo_asignatura_base_id"
+    t.index ["asignatura_nivel_base_id"], name: "index_curriculums_on_asignatura_nivel_base_id"
     t.index ["nivel_base_id"], name: "index_curriculums_on_nivel_base_id"
+    t.index ["tipo_asignatura_base_id"], name: "index_curriculums_on_tipo_asignatura_base_id"
   end
 
   create_table "documento_bases", force: :cascade do |t|
@@ -183,6 +198,16 @@ ActiveRecord::Schema.define(version: 2021_03_25_164207) do
     t.datetime "updated_at", null: false
     t.index ["orden"], name: "index_tema_ayudas_on_orden"
     t.index ["tipo"], name: "index_tema_ayudas_on_tipo"
+  end
+
+  create_table "tipo_asignatura_bases", force: :cascade do |t|
+    t.integer "orden"
+    t.string "tipo_asignatura_base"
+    t.integer "curriculum_base_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["curriculum_base_id"], name: "index_tipo_asignatura_bases_on_curriculum_base_id"
+    t.index ["orden"], name: "index_tipo_asignatura_bases_on_orden"
   end
 
   create_table "tutoriales", force: :cascade do |t|

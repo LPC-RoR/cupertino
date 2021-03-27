@@ -11,7 +11,8 @@ module RecursosHelper
 	        ["Estructura Base", "/estructuras",        'admin'],
 	        ["Documentos",      "/documento_bases",    'admin'],
 	        ["Administradores", "/administradores",    'admin'],
-	        ["Temas Ayuda",     "/tema_ayudas",        'admin']
+	        ["Temas Ayuda",     "/tema_ayudas",        'admin'],
+	        ["Procesos",        "/recursos/procesos",    'dog']
 	    ]
 	end
 
@@ -42,13 +43,15 @@ module RecursosHelper
 	def crud_conditions(objeto, btn)
 		case objeto.class.name
 		when 'NivelBase'
-			btn == 'Editar' and controller_name == 'curriculum_bases'
+			['estructuras', 'curriculum_bases'].include?(controller_name)
 		when 'AreaBase'
 			action_name == 'index'
 		when 'AsignaturaBase'
-			controller_name == 'curriculum_bases'
+			controller_name == 'tipo_asignatura_bases'
 		when 'DocumentoBase'
 			action_name == 'index'
+		when 'AsignaturaNivelBase'
+			false
 		else
 			true
 		end
@@ -62,10 +65,12 @@ module RecursosHelper
 				false
 #				objeto.children.empty? and controller_name == 'curriculum_bases'
 			when 'Desasignar'
-				(not ['nivel_bases', 'curriculum_bases'].include?(controller_name)) and action_name == 'show'
+				(not ['curriculum_bases'].include?(controller_name)) and action_name == 'show'
 			end
 		when 'AsignaturaBase'
-			not ['estructura_bases', 'curriculum_bases'].include?(controller_name)
+			not ['estructuras', 'curriculum_bases', 'tipo_asignatura_bases'].include?(controller_name)
+		when 'AsignaturaNivelBase'
+			controller_name == 'asignatura_bases'
 		else
 			true
 		end
@@ -80,6 +85,8 @@ module RecursosHelper
 			]
 		when 'AsignaturaBase'
 			[['Desasignar', '/desasignar', true]]
+		when 'AsignaturaNivelBase'
+			[['Eliminar', '/elimina_asignatura_nivel_base', false]]
         else
         	[]
 		end		
@@ -97,7 +104,7 @@ module RecursosHelper
 	## ------------------------------------------------------- FORM & SHOW
 
 	def detail_controller_path(controller)
-		if ['documento_bases'].include?(controller)
+		if ['documento_bases', 'asignatura_bases'].include?(controller)
 			"docs_base/#{controller}/detail"
 		else
 			"#{controller}/detail"

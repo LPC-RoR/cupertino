@@ -16,6 +16,7 @@ class DocsBase::CurriculumBasesController < ApplicationController
 
     @coleccion = {}
     @coleccion['nivel_bases'] = @objeto.nivel_bases.order(:orden)
+    @coleccion['tipo_asignatura_bases'] = @objeto.tipo_asignatura_bases.order(:orden)
     @coleccion['asignatura_bases'] = @objeto.asignatura_bases.order(:asignatura_base)
   end
 

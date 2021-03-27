@@ -11,6 +11,7 @@ class CurriculumBase < ApplicationRecord
 	]
 
 	has_many :nivel_bases
+	has_many :tipo_asignatura_bases
 	has_many :asignatura_bases
 
 end

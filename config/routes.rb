@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :recursos do
       collection do
         match :home, via: :get
+        match :procesos, via: :get
       end
     end
   end
@@ -32,10 +33,18 @@ Rails.application.routes.draw do
       match :asigna_select_elemento, via: :post, on: :collection
       match :desasignar, via: :get, on: :member
     end
+    resources :asignatura_nivel_bases do
+      match :elimina_asignatura_nivel_base, via: :get, on: :member
+    end
     resources :curriculums
     resources :curriculum_bases do
       resources :nivel_bases
       resources :asignatura_bases
+      resources :tipo_asignatura_bases
+    end
+    resources :documento_bases do
+      resources :item_bases
+      match :asigna_select_elemento, via: :post, on: :collection
     end
     resources :estructuras
     resources :item_bases
@@ -44,12 +53,12 @@ Rails.application.routes.draw do
       match :elimina_nivel_base, via: :get, on: :member
       match :asigna_select_elemento, via: :post, on: :collection
       match :desasignar, via: :get, on: :member
+      match :crea_asignatura_nivel, via: :post, on: :collection
     end
     resources :referencias
     resources :requisitos
-    resources :documento_bases do
-      resources :item_bases
-      match :asigna_select_elemento, via: :post, on: :collection
+    resources :tipo_asignatura_bases do
+      resources :asignatura_bases
     end
   end
 
