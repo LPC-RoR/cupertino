@@ -8,20 +8,21 @@ module RecursosHelper
     # se usa directamente en 0p/navbar/_navbar.html.erb
 	def menu
 	    [
-	        ["Estructura Base", "/estructuras",        'admin'],
-	        ["Documentos",      "/documento_bases",    'admin'],
-	        ["Administradores", "/administradores",    'admin'],
-	        ["Temas Ayuda",     "/tema_ayudas",        'admin'],
-	        ["Procesos",        "/recursos/procesos",    'dog']
+	        ["Estructura Base", "/estructuras",              'admin'],
+	        ["Asignaturas",     "/asignatura_nivel_bases", 'usuario'],
+	        ["Documentos",      "/documento_bases",          'admin'],
+	        ["Administradores", "/administradores",          'admin'],
+	        ["Temas Ayuda",     "/tema_ayudas",              'admin'],
+	        ["Procesos",        "/recursos/procesos",          'dog']
 	    ]
 	end
 
 	def display_item_app(item, tipo_item)
 		case item
 		when 'Temas'
-			session[:hay_proyecto] and Proyecto.find(session[:proyecto_activo]['id']).carpetas_personalizadas.any?
+			#session[:hay_proyecto] and Proyecto.find(session[:proyecto_activo]['id']).carpetas_personalizadas.any?
 		else
-			session[:hay_proyecto] or ['Proyectos'].include?(item)
+			true
 		end
 	end
 

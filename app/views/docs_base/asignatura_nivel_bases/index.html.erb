@@ -1,27 +1,11 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Asignatura Nivel Bases</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Asignatura base</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @asignatura_nivel_bases.each do |asignatura_nivel_base| %>
-      <tr>
-        <td><%= asignatura_nivel_base.asignatura_base_id %></td>
-        <td><%= link_to 'Show', asignatura_nivel_base %></td>
-        <td><%= link_to 'Edit', edit_asignatura_nivel_base_path(asignatura_nivel_base) %></td>
-        <td><%= link_to 'Destroy', asignatura_nivel_base, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Asignatura Nivel Base', new_asignatura_nivel_base_path %>
+<%= render partial: '0p/general/titulo', locals: {c: 'asignatura_nivel_bases', a: nil, titulo: 'Asignaturas base', size: '5'} %>
+<%= render partial: '0p/tabs/tabs', locals: {tabs: @tabs, tag: 'tab', active: @tab} %>
+<div class='row'>
+  <div class='col-md-3'>
+    <%= render partial: '0p/list/selector', locals: {titulo: 'Niveles base', list: @list_selector, sel: @sel, options: @options} %>
+  </div>
+  <div class='col-md-9'>
+    <%= render partial: '0p/tabla/solo_tabla', locals: {c: 'asignatura_nivel_bases', a: 'index'} %>
+    <%#= render partial: '0p/tabla/btn_nuevo', locals: {c: 'documento_bases'} %>
+  </div>
+</div>

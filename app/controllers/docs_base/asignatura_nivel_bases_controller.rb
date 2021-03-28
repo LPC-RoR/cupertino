@@ -1,9 +1,28 @@
 class DocsBase::AsignaturaNivelBasesController < ApplicationController
+  before_action :authenticate_usuario!
+  before_action :inicia_sesion
+  before_action :carga_temas_ayuda
   before_action :set_asignatura_nivel_base, only: %i[ show edit update destroy elimina_asignatura_nivel_base ]
 
   # GET /asignatura_nivel_bases or /asignatura_nivel_bases.json
   def index
-    @coleccion = AsignaturaNivelBase.all
+    @tabs = CurriculumBase.all.order(:orden).map {|cb| cb.curriculum_base}
+    if params[:html_options].blank?
+      @tab = CurriculumBase.all.order(:orden).first.curriculum_base
+      @sel = CurriculumBase.all.order(:orden).first.nivel_bases.order(:orden).first.nivel_base
+      curriculum_base = CurriculumBase.all.order(:orden).first
+      nivel_base = CurriculumBase.all.order(:orden).first.nivel_bases.order(:orden).first
+    else
+      @tab = (params[:html_options][:tab].blank? ? CurriculumBase.all.order(:orden).first.curriculum_base : params[:html_options][:tab] )
+      @sel = (params[:html_options][:sel].blank? ? CurriculumBase.all.order(:orden).first.nivel_bases.order(:orden).first.nivel_base : params[:html_options][:sel] )
+      curriculum_base = CurriculumBase.find_by(curriculum_base: @tab)
+      nivel_base = NivelBase.find_by(nivel_base: @sel)
+    end
+    @options = {'tab' => @tab, 'sel' => @sel}
+    @list_selector = (curriculum_base.nivel_bases.order(:orden).map {|nb| [nb.nivel_base, nb.asignatura_nivel_bases.count]})
+
+    @coleccion = {}
+    @coleccion['asignatura_nivel_bases'] = nivel_base.asignatura_nivel_bases
   end
 
   # GET /asignatura_nivel_bases/1 or /asignatura_nivel_bases/1.json

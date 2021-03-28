@@ -1,6 +1,8 @@
 <%= render partial: '0p/general/o_titulo', locals: {o: @objeto, a: action_name, size: '5'} %>
-<small><%= sanitize @objeto.d_detalle %></small>
-</br></br>
+<% unless @objeto.d_detalle.blank? %>
+	<small><%= sanitize @objeto.d_detalle %></small>
+	</br></br>
+<% end %>
 <div class='row'>
 	<div class='col-md-6'>
 	    <%= render partial: '0p/general/titulo', locals: {c: 'asignatura_nivel_bases', a: nil, titulo: 'Asignatura nivel(es) base', size: '5'} %>
