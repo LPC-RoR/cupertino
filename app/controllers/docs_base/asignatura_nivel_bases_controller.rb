@@ -15,16 +15,20 @@ class DocsBase::AsignaturaNivelBasesController < ApplicationController
     else
       @tab = (params[:html_options][:tab].blank? ? CurriculumBase.all.order(:orden).first.curriculum_base : params[:html_options][:tab] )
       @sel = (params[:html_options][:sel].blank? ? CurriculumBase.all.order(:orden).first.nivel_bases.order(:orden).first.nivel_base : params[:html_options][:sel] )
+
       curriculum_base = CurriculumBase.find_by(curriculum_base: @tab)
+      unless curriculum_base.nivel_bases.order(:orden).map {|nb| nb.nivel_base}.include?(@sel)
+        @sel = curriculum_base.nivel_bases.empty? ? '' : curriculum_base.nivel_bases.order(:orden).first.nivel_base
+      end
       nivel_base = NivelBase.find_by(nivel_base: @sel)
     end
     @options = {'tab' => @tab, 'sel' => @sel}
     @list_selector = (curriculum_base.nivel_bases.order(:orden).map {|nb| [nb.nivel_base, nb.n_anbs_con_herencia]})
 
     @coleccion = {}
-    @coleccion['asignatura_nivel_bases_base'] = nivel_base.anbs_con_herencia('base')
-    @coleccion['asignatura_nivel_bases_electivo'] = nivel_base.anbs_con_herencia('electivo')
-    @coleccion['asignatura_nivel_bases_libre_disposicion'] = nivel_base.anbs_con_herencia('libre disposición')
+    @coleccion['asignatura_nivel_bases_base'] = nivel_base.blank? ? [] : nivel_base.anbs_con_herencia('base')
+    @coleccion['asignatura_nivel_bases_electivo'] = nivel_base.blank? ? [] : nivel_base.anbs_con_herencia('electivo')
+    @coleccion['asignatura_nivel_bases_libre_disposicion'] = nivel_base.blank? ? [] : nivel_base.anbs_con_herencia('libre disposición')
   end
 
   # GET /asignatura_nivel_bases/1 or /asignatura_nivel_bases/1.json
