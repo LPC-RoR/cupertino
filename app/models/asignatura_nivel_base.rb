@@ -12,4 +12,5 @@ class AsignaturaNivelBase < ApplicationRecord
 	def d_asignatura_nivel
 		"#{self.asignatura_base.asignatura_base}#{' : ' if self.nivel_bases.any?}#{self.nivel_bases.map {|nb| nb.nivel_base}.join(' & ')}"
 	end
+
 end

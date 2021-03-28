@@ -27,4 +27,12 @@ class NivelBase < ApplicationRecord
 	has_many :referencias
 	has_many :documento_bases, through: :referencias
 
+	def n_anbs_con_herencia
+		self.asignatura_nivel_bases.count + (self.parent.present? ? self.parent.asignatura_nivel_bases.count : 0)
+	end
+
+	def anbs_con_herencia
+		self.parent.present? ? AsignaturaNivelBase.where(id: self.asignatura_nivel_bases.ids.union(self.parent.asignatura_nivel_bases.ids)) : self.asignatura_nivel_bases
+	end
+
 end

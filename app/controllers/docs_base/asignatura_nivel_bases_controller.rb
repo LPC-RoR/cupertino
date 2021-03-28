@@ -19,10 +19,10 @@ class DocsBase::AsignaturaNivelBasesController < ApplicationController
       nivel_base = NivelBase.find_by(nivel_base: @sel)
     end
     @options = {'tab' => @tab, 'sel' => @sel}
-    @list_selector = (curriculum_base.nivel_bases.order(:orden).map {|nb| [nb.nivel_base, nb.asignatura_nivel_bases.count]})
+    @list_selector = (curriculum_base.nivel_bases.order(:orden).map {|nb| [nb.nivel_base, nb.n_anbs_con_herencia]})
 
     @coleccion = {}
-    @coleccion['asignatura_nivel_bases'] = nivel_base.asignatura_nivel_bases
+    @coleccion['asignatura_nivel_bases'] = nivel_base.anbs_con_herencia
   end
 
   # GET /asignatura_nivel_bases/1 or /asignatura_nivel_bases/1.json
