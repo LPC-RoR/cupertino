@@ -153,7 +153,7 @@ module Cupertino
         },
         alias: {
             'asignatura_nivel_bases_base' => 'asignatura_nivel_bases',
-            'asignatura_nivel_bases_opcional' => 'asignatura_nivel_bases',
+            'asignatura_nivel_bases_electivo' => 'asignatura_nivel_bases',
             'asignatura_nivel_bases_libre_disposicion' => 'asignatura_nivel_bases'
         },
         sortable: {
