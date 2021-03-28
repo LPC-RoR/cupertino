@@ -152,11 +152,9 @@ module Cupertino
             }
         },
         alias: {
-            'papers' => 'publicaciones',
-            'hijos' => 'conceptos',
-            'contribuciones' => 'publicaciones',
-            'vistas' => 'publicaciones',
-            'revisiones' => 'publicaciones'
+            'asignatura_nivel_bases_base' => 'asignatura_nivel_bases',
+            'asignatura_nivel_bases_opcional' => 'asignatura_nivel_bases',
+            'asignatura_nivel_bases_libre_disposicion' => 'asignatura_nivel_bases'
         },
         sortable: {
             'publicaciones' => ['author', 'title', 'doc_type', 'year']
@@ -201,7 +199,7 @@ module Cupertino
 
     config.show = {
         titulo: [],
-        show_title: ['Publicacion'],
+        show_title: ['AsignaturaNivelBase'],
         partial_links: [],
         detalle: ['Publicacion', 'Equipo'],
         inline_form: ['Equipo'],

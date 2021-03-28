@@ -31,8 +31,10 @@ class NivelBase < ApplicationRecord
 		self.asignatura_nivel_bases.count + (self.parent.present? ? self.parent.asignatura_nivel_bases.count : 0)
 	end
 
-	def anbs_con_herencia
-		self.parent.present? ? AsignaturaNivelBase.where(id: self.asignatura_nivel_bases.ids.union(self.parent.asignatura_nivel_bases.ids)) : self.asignatura_nivel_bases
+	def anbs_con_herencia(tipo)
+		anb_ids = self.asignatura_nivel_bases.map {|anb| anb.id if anb.asignatura_base.tipo == tipo}.compact
+		parent_anb_ids = (self.parent.present? ? self.parent.asignatura_nivel_bases.map {|anb| anb.id if anb.asignatura_base.tipo == tipo}.compact : [])
+		AsignaturaNivelBase.where(id: anb_ids.union(parent_anb_ids))
 	end
 
 end

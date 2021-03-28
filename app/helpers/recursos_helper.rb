@@ -127,8 +127,8 @@ module RecursosHelper
 	# Método de apoyo usado en get_new_link (abajo)
 	def objeto_title(objeto)
 		case objeto.class.name
-		when 'Publicacion'
-			objeto.title
+		when 'AsignaturaNivelBase'
+			objeto.d_asignatura_nivel
 		when 'Linea'
 			objeto.columnas.order(:orden).first.columna
 		end

@@ -22,7 +22,9 @@ class DocsBase::AsignaturaNivelBasesController < ApplicationController
     @list_selector = (curriculum_base.nivel_bases.order(:orden).map {|nb| [nb.nivel_base, nb.n_anbs_con_herencia]})
 
     @coleccion = {}
-    @coleccion['asignatura_nivel_bases'] = nivel_base.anbs_con_herencia
+    @coleccion['asignatura_nivel_bases_base'] = nivel_base.anbs_con_herencia('base')
+    @coleccion['asignatura_nivel_bases_electivo'] = nivel_base.anbs_con_herencia('electivo')
+    @coleccion['asignatura_nivel_bases_libre_disposicion'] = nivel_base.anbs_con_herencia('libre disposición')
   end
 
   # GET /asignatura_nivel_bases/1 or /asignatura_nivel_bases/1.json
