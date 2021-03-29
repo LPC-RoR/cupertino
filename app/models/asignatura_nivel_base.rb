@@ -26,8 +26,8 @@ class AsignaturaNivelBase < ApplicationRecord
 		self.asignatura_nivel_base.present? ? self.asignatura_nivel_base : self.asignatura_base.asignatura_base
 	end
 
-	def d_status
-		"#{self.origen}:#{self.tipo}"
+	def status
+		"#{self.origen} : #{self.tipo} : #{self.tipo_asignatura_base.tipo_asignatura_base}"
 	end
 
 	def d_nivel

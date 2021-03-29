@@ -28,6 +28,7 @@ class AsignaturaBase < ApplicationRecord
 	end
 
 	def d_niveles
-		self.asignatura_nivel_bases.count
+		self.asignatura_nivel_bases.map {|anb| anb.nivel_bases.count}.inject(:+)
+#		self.asignatura_nivel_bases.count
 	end
 end

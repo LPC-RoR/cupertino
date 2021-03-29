@@ -211,7 +211,7 @@ module Cupertino
         hmt_links: {
             'Publicacion' => ['investigadores']
         },
-        status: [],
+        status: ['AsignaturaNivelBase'],
         hidden: {
             'publicaciones'  => ['autores', 'investigadores', 'procesos', 'cargas', 'clasificaciones', 'carpetas', 'evaluaciones', 'asignaciones', 'areas', 'rutas', 'instancias', 'etiquetas'],
             'carpetas'       => ['clasificaciones', 'herencias'],
