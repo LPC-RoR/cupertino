@@ -103,6 +103,6 @@ class Estructura::AsignaturaNivelBasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def asignatura_nivel_base_params
-      params.require(:asignatura_nivel_base).permit(:asignatura_base_id, :origen, :tipo, :alcance, :asignatura_nivel_base)
+      params.require(:asignatura_nivel_base).permit(:tipo_asignatura_base_id, :asignatura_base_id, :origen, :tipo, :asignatura_nivel_base)
     end
 end

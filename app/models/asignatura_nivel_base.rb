@@ -5,10 +5,11 @@ class AsignaturaNivelBase < ApplicationRecord
 
 	TABLA_FIELDS = [
 		['d_asignatura', 'show'],
-		['d_status', 'normal'],
+		['tipo', 'normal'],
 		['d_nivel',    'normal']
 	]
 
+	belongs_to :tipo_asignatura_base
 	belongs_to :asignatura_base
 
 	has_many :curriculums
@@ -26,7 +27,7 @@ class AsignaturaNivelBase < ApplicationRecord
 	end
 
 	def d_status
-		"#{self.origen}:#{self.tipo}:#{self.alcance}"
+		"#{self.origen}:#{self.tipo}"
 	end
 
 	def d_nivel

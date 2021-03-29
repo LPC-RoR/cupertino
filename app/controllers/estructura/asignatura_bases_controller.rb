@@ -109,6 +109,6 @@ class Estructura::AsignaturaBasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def asignatura_base_params
-      params.require(:asignatura_base).permit(:asignatura_base, :detalle, :curriculum_base_id, :tipo, :alcance)
+      params.require(:asignatura_base).permit(:asignatura_base, :detalle, :curriculum_base_id)
     end
 end

@@ -1,5 +1,6 @@
 <%= form.select :tipo, AsignaturaNivelBase::TIPO, include_blank: false, prompt: "Seleccione Tipo" %>
-<%= form.select :alcance, AsignaturaNivelBase::ALCANCE, include_blank: false, prompt: "Seleccione Alcance" %></br>
+<%= form.select :tipo_asignatura_base_id, TipoAsignaturaBase.all.order(:orden).collect { |tab| [tab.tipo_asignatura_base, tab.id] }, include_blank: false, prompt: "Seleccione tipo Asignatura" %></br>
+
 
 <small><%= form.label "Asignatura Nivel base" %></small></br>
 <div class='form-inline'>

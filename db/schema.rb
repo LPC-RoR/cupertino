@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_29_202524) do
+ActiveRecord::Schema.define(version: 2021_03_29_224837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,8 +47,9 @@ ActiveRecord::Schema.define(version: 2021_03_29_202524) do
     t.string "asignatura_nivel_base"
     t.string "origen"
     t.string "tipo"
-    t.string "alcance"
+    t.integer "tipo_asignatura_base_id"
     t.index ["asignatura_base_id"], name: "index_asignatura_nivel_bases_on_asignatura_base_id"
+    t.index ["tipo_asignatura_base_id"], name: "index_asignatura_nivel_bases_on_tipo_asignatura_base_id"
   end
 
   create_table "citas", force: :cascade do |t|
