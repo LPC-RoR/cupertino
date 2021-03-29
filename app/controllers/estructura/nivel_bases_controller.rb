@@ -16,7 +16,6 @@ class Estructura::NivelBasesController < ApplicationController
     @coleccion = {}
     @coleccion['nivel_bases'] = @objeto.children
     @coleccion['asignatura_nivel_bases'] = @objeto.asignatura_nivel_bases
-    @coleccion['documento_bases'] = @objeto.documento_bases.order(:documento_base)
   end
 
   # GET /nivel_bases/new
@@ -69,10 +68,8 @@ class Estructura::NivelBasesController < ApplicationController
 
   def asigna_select_elemento
     case params[:class_name1]
-    when 'DocumentoBase'
-      @objeto = DocumentoBase.find(params[:obj_id1])
-    when 'TipoAsignaturaBase'
-      @objeto = TipoAsignaturaBase.find(params[:obj_id1])
+    when 'AsignaturaNivelBase'
+      @objeto = AsignaturaNivelBase.find(params[:obj_id1])
     when 'NivelBase'
       @objeto = NivelBase.find(params[:obj_id1])
     end

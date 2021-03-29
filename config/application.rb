@@ -167,7 +167,7 @@ module Cupertino
         detail_types_controller: {
             help: ['mejoras', 'mensajes', 'observaciones', 'tema_ayudas', 'tutoriales', 'pasos'],
             data: ['especificaciones', 'tablas'],
-            modelo: ['documento_bases', 'asignatura_bases']
+            modelo: ['documento_bases', 'asignatura_bases', 'asignatura_nivel_bases']
         },
         conditional_fields: {
             'Publicacion' => [
@@ -211,7 +211,7 @@ module Cupertino
         hmt_links: {
             'Publicacion' => ['investigadores']
         },
-        status: ['AsignaturaBase'],
+        status: [],
         hidden: {
             'publicaciones'  => ['autores', 'investigadores', 'procesos', 'cargas', 'clasificaciones', 'carpetas', 'evaluaciones', 'asignaciones', 'areas', 'rutas', 'instancias', 'etiquetas'],
             'carpetas'       => ['clasificaciones', 'herencias'],

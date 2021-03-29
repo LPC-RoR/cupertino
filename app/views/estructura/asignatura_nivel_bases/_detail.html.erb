@@ -1,0 +1,10 @@
+<%= form.select :tipo, AsignaturaNivelBase::TIPO, include_blank: false, prompt: "Seleccione Tipo" %>
+<%= form.select :alcance, AsignaturaNivelBase::ALCANCE, include_blank: false, prompt: "Seleccione Alcance" %></br>
+
+<small><%= form.label "Asignatura Nivel base" %></small></br>
+<div class='form-inline'>
+	<%= form.text_field(:asignatura_nivel_base, size: 67, class: 'form-control' ) %>
+</div>
+
+<%= form.hidden_field :asignatura_base_id %>
+<%= form.hidden_field :origen %>

@@ -1,7 +1,11 @@
 class AsignaturaNivelBase < ApplicationRecord
 
+	TIPO = ['base', 'electivo', 'libre disposición']
+	ALCANCE = ['nivel', 'multinivel']
+
 	TABLA_FIELDS = [
 		['d_asignatura', 'show'],
+		['d_status', 'normal'],
 		['d_nivel',    'normal']
 	]
 
@@ -18,7 +22,11 @@ class AsignaturaNivelBase < ApplicationRecord
 	end
 
 	def d_asignatura
-		self.asignatura_base.asignatura_base
+		self.asignatura_nivel_base.present? ? self.asignatura_nivel_base : self.asignatura_base.asignatura_base
+	end
+
+	def d_status
+		"#{self.origen}:#{self.tipo}:#{self.alcance}"
 	end
 
 	def d_nivel

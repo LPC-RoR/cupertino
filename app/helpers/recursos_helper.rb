@@ -48,11 +48,11 @@ module RecursosHelper
 		when 'AreaBase'
 			action_name == 'index'
 		when 'AsignaturaBase'
-			controller_name == 'tipo_asignatura_bases'
+			controller_name == 'curriculum_bases'
 		when 'DocumentoBase'
 			action_name == 'index'
 		when 'AsignaturaNivelBase'
-			false
+			controller_name == 'asignatura_bases'
 		else
 			true
 		end
@@ -70,8 +70,6 @@ module RecursosHelper
 			end
 		when 'AsignaturaBase'
 			not ['estructuras', 'curriculum_bases', 'tipo_asignatura_bases'].include?(controller_name)
-		when 'AsignaturaNivelBase'
-			controller_name == 'asignatura_bases'
 		else
 			true
 		end
@@ -86,8 +84,6 @@ module RecursosHelper
 			]
 		when 'AsignaturaBase'
 			[['Desasignar', '/desasignar', true]]
-		when 'AsignaturaNivelBase'
-			[['Eliminar', '/elimina_asignatura_nivel_base', false]]
         else
         	[]
 		end		
@@ -105,8 +101,10 @@ module RecursosHelper
 	## ------------------------------------------------------- FORM & SHOW
 
 	def detail_controller_path(controller)
-		if ['documento_bases', 'asignatura_bases'].include?(controller)
+		if ['documento_bases'].include?(controller)
 			"documento/#{controller}/detail"
+		elsif ['asignatura_bases', 'asignatura_nivel_bases'].include?(controller_name)
+			"estructura/#{controller}/detail"
 		else
 			"#{controller}/detail"
 		end

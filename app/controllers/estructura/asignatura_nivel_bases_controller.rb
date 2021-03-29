@@ -2,7 +2,7 @@ class Estructura::AsignaturaNivelBasesController < ApplicationController
   before_action :authenticate_usuario!
   before_action :inicia_sesion
   before_action :carga_temas_ayuda
-  before_action :set_asignatura_nivel_base, only: %i[ show edit update destroy elimina_asignatura_nivel_base ]
+  before_action :set_asignatura_nivel_base, only: %i[ show edit update destroy ]
 
   # GET /asignatura_nivel_bases or /asignatura_nivel_bases.json
   def index
@@ -33,11 +33,18 @@ class Estructura::AsignaturaNivelBasesController < ApplicationController
 
   # GET /asignatura_nivel_bases/1 or /asignatura_nivel_bases/1.json
   def show
+    @nivel_bases_seleccion = NivelBase.all.order(:orden)
+#    @documento_bases_seleccion = DocumentoBase.where(id: (@objeto.curriculum_base.documento_bases.ids - @objeto.documento_bases.ids)).order(:documento_base)
+
+    @coleccion = {}
+    @coleccion['documento_bases'] = @objeto.documento_bases.order(:documento_base)
+    @coleccion['nivel_bases'] = @objeto.nivel_bases.order(:orden)
   end
 
   # GET /asignatura_nivel_bases/new
   def new
-    @objeto = AsignaturaNivelBase.new
+    origen = (session[:es_administrador] ? 'base' : 'usuario')
+    @objeto = AsignaturaNivelBase.new(asignatura_base_id: params[:asignatura_base_id], origen: origen)
   end
 
   # GET /asignatura_nivel_bases/1/edit
@@ -84,14 +91,6 @@ class Estructura::AsignaturaNivelBasesController < ApplicationController
     end
   end
 
-  def elimina_asignatura_nivel_base
-    asignatura_base = @objeto.asignatura_base
-    @objeto.nivel_bases.delete_all
-    @objeto.delete
-
-    redirect_to asignatura_base
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_asignatura_nivel_base
@@ -104,6 +103,6 @@ class Estructura::AsignaturaNivelBasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def asignatura_nivel_base_params
-      params.require(:asignatura_nivel_base).permit(:asignatura_base_id)
+      params.require(:asignatura_nivel_base).permit(:asignatura_base_id, :origen, :tipo, :alcance, :asignatura_nivel_base)
     end
 end

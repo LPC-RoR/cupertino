@@ -30,12 +30,11 @@ Rails.application.routes.draw do
   scope module: 'estructura' do
     resources :area_bases
     resources :asignatura_bases do
+      resources :asignatura_nivel_bases
       match :asigna_select_elemento, via: :post, on: :collection
       match :desasignar, via: :get, on: :member
     end
-    resources :asignatura_nivel_bases do
-      match :elimina_asignatura_nivel_base, via: :get, on: :member
-    end
+    resources :asignatura_nivel_bases
     resources :curriculums
     resources :curriculum_bases do
       resources :nivel_bases
@@ -52,9 +51,7 @@ Rails.application.routes.draw do
     end
     resources :referencias
     resources :requisitos
-    resources :tipo_asignatura_bases do
-      resources :asignatura_bases
-    end
+    resources :tipo_asignatura_bases
   end
 
   scope module: 'documento' do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_29_165312) do
+ActiveRecord::Schema.define(version: 2021_03_29_202524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,20 +37,17 @@ ActiveRecord::Schema.define(version: 2021_03_29_165312) do
     t.datetime "updated_at", null: false
     t.text "detalle"
     t.integer "curriculum_base_id"
-    t.integer "tipo_asignatura_base_id"
-    t.string "tipo"
-    t.string "alcance"
-    t.index ["alcance"], name: "index_asignatura_bases_on_alcance"
     t.index ["curriculum_base_id"], name: "index_asignatura_bases_on_curriculum_base_id"
-    t.index ["tipo"], name: "index_asignatura_bases_on_tipo"
-    t.index ["tipo_asignatura_base_id"], name: "index_asignatura_bases_on_tipo_asignatura_base_id"
   end
 
   create_table "asignatura_nivel_bases", force: :cascade do |t|
     t.integer "asignatura_base_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "nombre_asignatura"
+    t.string "asignatura_nivel_base"
+    t.string "origen"
+    t.string "tipo"
+    t.string "alcance"
     t.index ["asignatura_base_id"], name: "index_asignatura_nivel_bases_on_asignatura_base_id"
   end
 

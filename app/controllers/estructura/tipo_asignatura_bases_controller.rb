@@ -12,7 +12,7 @@ class Estructura::TipoAsignaturaBasesController < ApplicationController
   # GET /tipo_asignatura_bases/1 or /tipo_asignatura_bases/1.json
   def show
     @coleccion = {}
-    @coleccion['asignatura_bases'] = @objeto.asignatura_bases.order(:asignatura_base)
+    @coleccion['asignatura_nivel_bases'] = @objeto.asignatura_nivel_bases.order(:asignatura_base)
   end
 
   # GET /tipo_asignatura_bases/new

@@ -14,6 +14,4 @@ class TipoAsignaturaBase < ApplicationRecord
 
 	belongs_to :curriculum_base
 
-	has_many :asignatura_bases
-
 end

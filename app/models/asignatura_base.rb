@@ -1,10 +1,7 @@
 class AsignaturaBase < ApplicationRecord
 
-	TIPO = ['base', 'electivo', 'libre disposición']
-	ALCANCE = ['nivel', 'multinivel']
-
 	TABLA_FIELDS = [
-		['d_asignatura', 'show'],
+		['asignatura_base', 'show'],
 		['d_niveles',  'normal']
 	]
 
@@ -12,12 +9,10 @@ class AsignaturaBase < ApplicationRecord
  	FORM_FIELDS = [
 		['asignatura_base',          'entry'],
 		['detalle',              'text_area'],
-		['curriculum_base_id',      'hidden'],
-		['tipo_asignatura_base_id', 'hidden']
+		['curriculum_base_id',      'hidden']
 	]
 
 	belongs_to :curriculum_base
-	belongs_to :tipo_asignatura_base
 
 	has_many :asignatura_nivel_bases
 
@@ -26,13 +21,6 @@ class AsignaturaBase < ApplicationRecord
 
 	def d_detalle
 	  self.detalle.blank? ? '' : self.detalle.gsub(/\n/, '<br>')
-	end
-
-	def d_asignatura
-		tipo = (self.tipo == 'base' or self.tipo.blank?) ? '' : self.tipo
-		alcance = (self.alcance == 'nivel' or self.alcance.blank?) ? '' : '+'
-		nota = tipo+alcance
-		self.asignatura_base+(nota == '' ? '' : " : #{nota}")
 	end
 
 	def status

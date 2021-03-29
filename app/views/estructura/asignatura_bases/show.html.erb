@@ -4,22 +4,20 @@
 	</br></br>
 <% end %>
 
-<%= render partial: '0p/general/btn', locals: {texto: @objeto.tipo_asignatura_base.tipo_asignatura_base, link: @objeto.tipo_asignatura_base, delete: false, style: 'btn-outline-dark', clr: 'dark'} %>
-</br></br>
-
 <div class='row'>
 	<div class='col-md-6'>
 	    <%= render partial: '0p/general/titulo', locals: {c: 'asignatura_nivel_bases', a: nil, titulo: 'Asignatura nivel(es) base', size: '5'} %>
 	    <%= render partial: '0p/tabla/solo_tabla', locals: {c: 'asignatura_nivel_bases', a: 'index'} %>
+	    <%= render partial: '0p/tabla/btn_nuevo', locals: {c: 'asignatura_nivel_bases'} %>
 
 	    <!-- GENERA ASIGNATURA-NIVEL-BASE -->
-		<%= form_for :objeto_base, url: "/nivel_bases/crea_asignatura_nivel?#{url_params([@objeto])}" do |form| %>
-			<%= form.select :objeto_id, @nivel_bases_seleccion.collect { |asignacion| [asignacion.nivel_base, asignacion.id] }, include_blank: false, prompt: "Seleccione nivel" %>
-			<div class='form-inline'>
-				<%= form.text_field(:nombre_asignatura, size: 46, class: 'form-control' ) %>
-				<%= form.submit '+ Asignatura Nivel'  %>
-			</div>
-		<% end  %>
+		<%#= form_for :objeto_base, url: "/nivel_bases/crea_asignatura_nivel?#{url_params([@objeto])}" do |form| %>
+			<%#= form.select :objeto_id, @nivel_bases_seleccion.collect { |asignacion| [asignacion.nivel_base, asignacion.id] }, include_blank: false, prompt: "Seleccione nivel" %>
+			<!--div class='form-inline'-->
+				<%#= form.text_field(:nombre_asignatura, size: 46, class: 'form-control' ) %>
+				<%#= form.submit '+ Asignatura Nivel'  %>
+			<!--/div-->
+		<%# end  %>
 
 
 	</div>
