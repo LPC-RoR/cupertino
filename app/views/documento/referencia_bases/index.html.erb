@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Referencia Bases</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Referencia base</th>
+      <th>Tipo referencia base</th>
+      <th>Seccion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @referencia_bases.each do |referencia_base| %>
+      <tr>
+        <td><%= referencia_base.referencia_base %></td>
+        <td><%= referencia_base.tipo_referencia_base_id %></td>
+        <td><%= referencia_base.seccion %></td>
+        <td><%= link_to 'Show', referencia_base %></td>
+        <td><%= link_to 'Edit', edit_referencia_base_path(referencia_base) %></td>
+        <td><%= link_to 'Destroy', referencia_base, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Referencia Base', new_referencia_base_path %>

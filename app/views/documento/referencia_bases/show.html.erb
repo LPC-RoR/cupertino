@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Referencia base:</strong>
+  <%= @referencia_base.referencia_base %>
+</p>
+
+<p>
+  <strong>Tipo referencia base:</strong>
+  <%= @referencia_base.tipo_referencia_base_id %>
+</p>
+
+<p>
+  <strong>Seccion:</strong>
+  <%= @referencia_base.seccion %>
+</p>
+
+<%= link_to 'Edit', edit_referencia_base_path(@referencia_base) %> |
+<%= link_to 'Back', referencia_bases_path %>

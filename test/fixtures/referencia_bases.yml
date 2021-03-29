@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  referencia_base: MyString
+  tipo_referencia_base_id: MyString
+  seccion: MyString
+
+two:
+  referencia_base: MyString
+  tipo_referencia_base_id: MyString
+  seccion: MyString

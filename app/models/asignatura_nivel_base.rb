@@ -10,6 +10,9 @@ class AsignaturaNivelBase < ApplicationRecord
 	has_many :curriculums
 	has_many :nivel_bases, through: :curriculums
 
+	has_many :referencias
+	has_many :documento_bases, through: :referencias
+
 	def d_asignatura_nivel
 		"#{self.asignatura_base.asignatura_base}#{' : ' if self.nivel_bases.any?}#{self.nivel_bases.map {|nb| nb.nivel_base}.join(' & ')}"
 	end

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Referencia base:</strong>
+  <%= @cita.referencia_base_id %>
+</p>
+
+<p>
+  <strong>Documento base:</strong>
+  <%= @cita.documento_base_id %>
+</p>
+
+<%= link_to 'Edit', edit_cita_path(@cita) %> |
+<%= link_to 'Back', citas_path %>

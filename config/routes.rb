@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     end
   end
 
-  scope module: 'docs_base' do
+  scope module: 'estructura' do
     resources :area_bases
     resources :asignatura_bases do
       match :asigna_select_elemento, via: :post, on: :collection
@@ -42,13 +42,8 @@ Rails.application.routes.draw do
       resources :asignatura_bases
       resources :tipo_asignatura_bases
     end
-    resources :documento_bases do
-      resources :item_bases
-      match :asigna_select_elemento, via: :post, on: :collection
-    end
     resources :estructuras
-    resources :item_bases
-    resources :nivel_bases do
+      resources :nivel_bases do
       match :inline_nuevo, via: :post, on: :collection
       match :elimina_nivel_base, via: :get, on: :member
       match :asigna_select_elemento, via: :post, on: :collection
@@ -60,6 +55,15 @@ Rails.application.routes.draw do
     resources :tipo_asignatura_bases do
       resources :asignatura_bases
     end
+  end
+
+  scope module: 'documento' do
+    resources :citas
+    resources :documento_bases do
+      match :asigna_select_elemento, via: :post, on: :collection
+    end
+    resources :referencia_bases
+    resources :tipo_referencia_bases
   end
 
   devise_for :usuarios, controllers: {

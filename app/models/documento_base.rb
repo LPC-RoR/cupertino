@@ -14,10 +14,10 @@ class DocumentoBase < ApplicationRecord
 
 	belongs_to :area_base
 
-	has_many :item_bases
-
 	has_many :referencias
 	has_many :asignatura_bases, through: :referencias
+	has_many :asignatura_nivel_bases, through: :referencias
 
-	has_many :nivel_bases, through: :referencias
+	has_many :citas
+	has_many :referencia_bases, through: :citas
 end

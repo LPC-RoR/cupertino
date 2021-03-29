@@ -106,7 +106,7 @@ module RecursosHelper
 
 	def detail_controller_path(controller)
 		if ['documento_bases', 'asignatura_bases'].include?(controller)
-			"docs_base/#{controller}/detail"
+			"documento/#{controller}/detail"
 		else
 			"#{controller}/detail"
 		end

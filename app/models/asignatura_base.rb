@@ -4,7 +4,8 @@ class AsignaturaBase < ApplicationRecord
 	ALCANCE = ['nivel', 'multinivel']
 
 	TABLA_FIELDS = [
-		['d_asignatura', 'show']
+		['d_asignatura', 'show'],
+		['d_niveles',  'normal']
 	]
 
 	# -------------------- FORM  -----------------------
@@ -36,5 +37,9 @@ class AsignaturaBase < ApplicationRecord
 
 	def status
 		"[ #{self.tipo.blank? ? '' : self.tipo} : #{self.alcance.blank? ? '' : self.alcance} ]"
+	end
+
+	def d_niveles
+		self.asignatura_nivel_bases.count
 	end
 end

@@ -1,0 +1,27 @@
+<%= form_with(model: cita, local: true) do |form| %>
+  <% if cita.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cita.errors.count, "error") %> prohibited this cita from being saved:</h2>
+
+      <ul>
+      <% cita.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :referencia_base_id %>
+    <%= form.number_field :referencia_base_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :documento_base_id %>
+    <%= form.number_field :documento_base_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

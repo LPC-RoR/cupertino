@@ -16,7 +16,4 @@ class TipoAsignaturaBase < ApplicationRecord
 
 	has_many :asignatura_bases
 
-	has_many :curriculums
-	has_many :nivel_bases, through: :curriculums
-	
 end

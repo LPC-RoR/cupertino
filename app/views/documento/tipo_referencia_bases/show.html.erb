@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Orden:</strong>
+  <%= @tipo_referencia_base.orden %>
+</p>
+
+<p>
+  <strong>Tipo referencia base:</strong>
+  <%= @tipo_referencia_base.tipo_referencia_base %>
+</p>
+
+<%= link_to 'Edit', edit_tipo_referencia_base_path(@tipo_referencia_base) %> |
+<%= link_to 'Back', tipo_referencia_bases_path %>
