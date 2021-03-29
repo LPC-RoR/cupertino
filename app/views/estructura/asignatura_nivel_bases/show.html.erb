@@ -1,4 +1,8 @@
 <%= render partial: '0p/general/o_titulo', locals: {o: @objeto, a: action_name, size: '5'} %>
+<%= render partial: '0p/general/btn', locals: {texto: @objeto.asignatura_base.curriculum_base.curriculum_base, link: @objeto.asignatura_base.curriculum_base, delete: false, style: 'btn-outline-dark', clr: 'dark'} %>
+<%= render partial: '0p/general/btn', locals: {texto: @objeto.asignatura_base.asignatura_base, link: @objeto.asignatura_base.asignatura_base, delete: false, style: 'btn-outline-dark', clr: 'dark'} %>
+</br></br>
+
 <div class='row'>
 	<div class='col-md-6'>
 	    <%= render partial: '0p/general/titulo', locals: {c: 'nivel_bases', a: nil, titulo: 'Niveles base', size: '5'} %>

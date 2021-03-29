@@ -1,8 +1,11 @@
 <%= render partial: '0p/general/o_titulo', locals: {o: @objeto, a: action_name, size: '5'} %>
 <% unless @objeto.d_detalle.blank? %>
 	<small><%= sanitize @objeto.d_detalle %></small>
-	</br></br>
 <% end %>
+</br>
+
+<%= render partial: '0p/general/btn', locals: {texto: @objeto.curriculum_base.curriculum_base, link: @objeto.curriculum_base, delete: false, style: 'btn-outline-dark', clr: 'dark'} %>
+</br></br>
 
 <div class='row'>
 	<div class='col-md-6'>
