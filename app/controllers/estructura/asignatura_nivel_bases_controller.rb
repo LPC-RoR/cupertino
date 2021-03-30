@@ -29,7 +29,7 @@ class Estructura::AsignaturaNivelBasesController < ApplicationController
     @list_selector = (curriculum_base.asignatura_bases.order(:asignatura_base).map {|ab| [ab.asignatura_base, ab.asignatura_nivel_bases.count]})
 
     @coleccion = {}
-    @coleccion['asignatura_nivel_bases'] = asignatura_base.asignatura_nivel_bases.order(:orden)
+    @coleccion['asignatura_nivel_bases'] = asignatura_base.blank? ? [] : asignatura_base.asignatura_nivel_bases.order(:orden)
 #    @coleccion['asignatura_nivel_bases_base'] = asignatura_base.blank? ? [] : asignatura_base.anbs_con_herencia('base')
 #    @coleccion['asignatura_nivel_bases_electivo'] = asignatura_base.blank? ? [] : asignatura_base.anbs_con_herencia('electivo')
 #    @coleccion['asignatura_nivel_bases_libre_disposicion'] = asignatura_base.blank? ? [] : asignatura_base.anbs_con_herencia('libre disposición')
