@@ -88,18 +88,12 @@ class Estructura::NivelBasesController < ApplicationController
 
   def desasignar
     case params[:class_name]
-    when 'AsignaturaBase'
-      elemento = AsignaturaBase.find(params[:objeto_id])
-      @objeto.asignatura_bases.delete(elemento)
-    when 'DocumentoBase'
-      elemento = DocumentoBase.find(params[:objeto_id])
-      @objeto.documento_bases.delete(elemento)
+    when 'AsignaturaNivelBase'
+      elemento = AsignaturaNivelBase.find(params[:objeto_id])
+      @objeto.asignatura_nivel_bases.delete(elemento)
     when 'NivelBase'
       elemento = NivelBase.find(params[:objeto_id])
       elemento.children.delete(@objeto)
-    when 'TipoAsignaturaBase'
-      elemento = TipoAsignaturaBase.find(params[:objeto_id])
-      @objeto.tipo_asignatura_bases.delete(elemento)
     end
 
     redirect_to elemento

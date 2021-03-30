@@ -26,13 +26,10 @@ class Estructura::AsignaturaNivelBasesController < ApplicationController
       asignatura_base = AsignaturaBase.find_by(asignatura_base: @sel)
     end
     @options = {'tab' => @tab, 'sel' => @sel}
-    puts "************************************************************* index"
-    puts curriculum_base.class
-    puts curriculum_base.id
     @list_selector = (curriculum_base.asignatura_bases.order(:asignatura_base).map {|ab| [ab.asignatura_base, ab.asignatura_nivel_bases.count]})
 
     @coleccion = {}
-    @coleccion['asignatura_nivel_bases'] = asignatura_base.asignatura_nivel_bases.order(:created_at)
+    @coleccion['asignatura_nivel_bases'] = asignatura_base.asignatura_nivel_bases.order(:orden)
 #    @coleccion['asignatura_nivel_bases_base'] = asignatura_base.blank? ? [] : asignatura_base.anbs_con_herencia('base')
 #    @coleccion['asignatura_nivel_bases_electivo'] = asignatura_base.blank? ? [] : asignatura_base.anbs_con_herencia('electivo')
 #    @coleccion['asignatura_nivel_bases_libre_disposicion'] = asignatura_base.blank? ? [] : asignatura_base.anbs_con_herencia('libre disposición')
@@ -110,6 +107,6 @@ class Estructura::AsignaturaNivelBasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def asignatura_nivel_base_params
-      params.require(:asignatura_nivel_base).permit(:tipo_asignatura_base_id, :asignatura_base_id, :origen, :tipo, :asignatura_nivel_base)
+      params.require(:asignatura_nivel_base).permit(:tipo_asignatura_base_id, :asignatura_base_id, :origen, :tipo, :asignatura_nivel_base, :orden)
     end
 end

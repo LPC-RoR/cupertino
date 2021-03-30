@@ -2,7 +2,7 @@
 <%= render partial: '0p/tabs/tabs', locals: {tabs: @tabs, tag: 'tab', active: @tab} %>
 <div class='row'>
   <div class='col-md-3'>
-    <%= render partial: '0p/list/selector', locals: {titulo: 'Niveles base', list: @list_selector, sel: @sel, options: @options} %>
+    <%= render partial: '0p/list/selector', locals: {titulo: 'Asignaturas base', list: @list_selector, sel: @sel, options: @options} %>
   </div>
   <div class='col-md-9'>
     <% unless @coleccion['asignatura_nivel_bases'].empty? %>
