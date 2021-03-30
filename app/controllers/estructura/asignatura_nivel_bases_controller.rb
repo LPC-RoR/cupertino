@@ -7,28 +7,35 @@ class Estructura::AsignaturaNivelBasesController < ApplicationController
   # GET /asignatura_nivel_bases or /asignatura_nivel_bases.json
   def index
     @tabs = CurriculumBase.all.order(:orden).map {|cb| cb.curriculum_base}
+
+    primer_curriculum = CurriculumBase.all.order(:orden).first
+    primer_asignatura = primer_curriculum.asignatura_bases.order(:asignatura_base).first
     if params[:html_options].blank?
-      @tab = CurriculumBase.all.order(:orden).first.curriculum_base
-      @sel = CurriculumBase.all.order(:orden).first.nivel_bases.order(:orden).first.nivel_base
-      curriculum_base = CurriculumBase.all.order(:orden).first
-      nivel_base = CurriculumBase.all.order(:orden).first.nivel_bases.order(:orden).first
+      @tab = primer_curriculum.curriculum_base
+      curriculum_base = primer_curriculum
+      @sel = primer_asignatura.asignatura_base
+      asignatura_base = primer_asignatura
     else
-      @tab = (params[:html_options][:tab].blank? ? CurriculumBase.all.order(:orden).first.curriculum_base : params[:html_options][:tab] )
-      @sel = (params[:html_options][:sel].blank? ? CurriculumBase.all.order(:orden).first.nivel_bases.order(:orden).first.nivel_base : params[:html_options][:sel] )
+      @tab = (params[:html_options][:tab].blank? ? primer_curriculum.curriculum_base : params[:html_options][:tab] )
+      @sel = (params[:html_options][:sel].blank? ? primer_asignatura.asignatura_base : params[:html_options][:sel] )
 
       curriculum_base = CurriculumBase.find_by(curriculum_base: @tab)
-      unless curriculum_base.nivel_bases.order(:orden).map {|nb| nb.nivel_base}.include?(@sel)
-        @sel = curriculum_base.nivel_bases.empty? ? '' : curriculum_base.nivel_bases.order(:orden).first.nivel_base
+      unless curriculum_base.asignatura_bases.order(:asignatura_base).map {|ab| ab.asignatura_base}.include?(@sel)
+        @sel = curriculum_base.asignatura_bases.empty? ? '' : curriculum_base.asignatura_bases.order(:asignatura_base).first.asignatura_base
       end
-      nivel_base = NivelBase.find_by(nivel_base: @sel)
+      asignatura_base = AsignaturaBase.find_by(asignatura_base: @sel)
     end
     @options = {'tab' => @tab, 'sel' => @sel}
-    @list_selector = (curriculum_base.nivel_bases.order(:orden).map {|nb| [nb.nivel_base, nb.n_anbs_con_herencia]})
+    puts "************************************************************* index"
+    puts curriculum_base.class
+    puts curriculum_base.id
+    @list_selector = (curriculum_base.asignatura_bases.order(:asignatura_base).map {|ab| [ab.asignatura_base, ab.asignatura_nivel_bases.count]})
 
     @coleccion = {}
-    @coleccion['asignatura_nivel_bases_base'] = nivel_base.blank? ? [] : nivel_base.anbs_con_herencia('base')
-    @coleccion['asignatura_nivel_bases_electivo'] = nivel_base.blank? ? [] : nivel_base.anbs_con_herencia('electivo')
-    @coleccion['asignatura_nivel_bases_libre_disposicion'] = nivel_base.blank? ? [] : nivel_base.anbs_con_herencia('libre disposición')
+    @coleccion['asignatura_nivel_bases'] = asignatura_base.asignatura_nivel_bases.order(:created_at)
+#    @coleccion['asignatura_nivel_bases_base'] = asignatura_base.blank? ? [] : asignatura_base.anbs_con_herencia('base')
+#    @coleccion['asignatura_nivel_bases_electivo'] = asignatura_base.blank? ? [] : asignatura_base.anbs_con_herencia('electivo')
+#    @coleccion['asignatura_nivel_bases_libre_disposicion'] = asignatura_base.blank? ? [] : asignatura_base.anbs_con_herencia('libre disposición')
   end
 
   # GET /asignatura_nivel_bases/1 or /asignatura_nivel_bases/1.json

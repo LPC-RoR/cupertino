@@ -5,20 +5,20 @@
     <%= render partial: '0p/list/selector', locals: {titulo: 'Niveles base', list: @list_selector, sel: @sel, options: @options} %>
   </div>
   <div class='col-md-9'>
-    <% unless @coleccion['asignatura_nivel_bases_base'].empty? %>
-      <%= render partial: '0p/general/titulo', locals: {c: 'asignatura_nivel_bases', a: nil, titulo: 'Asignaturas base', size: '5'} %>
-      <%= render partial: '0p/tabla/solo_tabla', locals: {c: 'asignatura_nivel_bases_base', a: 'index'} %>
+    <% unless @coleccion['asignatura_nivel_bases'].empty? %>
+      <%= render partial: '0p/general/titulo', locals: {c: 'asignatura_nivel_bases', a: nil, titulo: 'Asignaturas', size: '5'} %>
+      <%= render partial: '0p/tabla/solo_tabla', locals: {c: 'asignatura_nivel_bases', a: 'index'} %>
       </br></br>
     <% end %>
-    <% unless @coleccion['asignatura_nivel_bases_electivo'].empty? %>
-      <%= render partial: '0p/general/titulo', locals: {c: 'asignatura_nivel_bases', a: nil, titulo: 'Asignaturas electiva', size: '5'} %>
-      <%= render partial: '0p/tabla/solo_tabla', locals: {c: 'asignatura_nivel_bases_electivo', a: 'index'} %>
+    <%# unless @coleccion['asignatura_nivel_bases_electivo'].empty? %>
+      <%#= render partial: '0p/general/titulo', locals: {c: 'asignatura_nivel_bases', a: nil, titulo: 'Asignaturas electiva', size: '5'} %>
+      <%#= render partial: '0p/tabla/solo_tabla', locals: {c: 'asignatura_nivel_bases_electivo', a: 'index'} %>
       </br></br>
-    <% end %>
-    <% unless @coleccion['asignatura_nivel_bases_libre_disposicion'].empty? %>
-      <%= render partial: '0p/general/titulo', locals: {c: 'asignatura_nivel_bases', a: nil, titulo: 'Asignaturas libre disposición', size: '5'} %>
-      <%= render partial: '0p/tabla/solo_tabla', locals: {c: 'asignatura_nivel_bases_libre_disposicion', a: 'index'} %>
-    <% end %>
+    <%# end %>
+    <%# unless @coleccion['asignatura_nivel_bases_libre_disposicion'].empty? %>
+      <%#= render partial: '0p/general/titulo', locals: {c: 'asignatura_nivel_bases', a: nil, titulo: 'Asignaturas libre disposición', size: '5'} %>
+      <%#= render partial: '0p/tabla/solo_tabla', locals: {c: 'asignatura_nivel_bases_libre_disposicion', a: 'index'} %>
+    <%# end %>
 
     <%#= render partial: '0p/tabla/btn_nuevo', locals: {c: 'documento_bases'} %>
   </div>
