@@ -9,10 +9,18 @@ class Aplicacion::RecursosController < ApplicationController
   end
 
   def procesos
-    NivelBase.delete_all
-    Curriculum.delete_all
+  #  NivelBase.delete_all
+  #  Curriculum.delete_all
 
-    redirect_to root
+  anbs_ids = AsignaturaNivelBase.all.map {|anb| anb.id if anb.nivel_bases.count == 0}.compact
+  anbs = AsignaturaNivelBase.where(id: anbs_ids)
+  anbs.delete_all
+
+  abs_ids = AsignaturaBase.all.map {|ab| ab.id if ab.asignatura_nivel_bases.count == 0}.compact
+  abs = AsignaturaBase.where(id: abs_ids)
+  abs.delete_all
+
+    redirect_to root_path
   end
 
   private
