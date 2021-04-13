@@ -54,7 +54,7 @@ module RecursosHelper
 		when 'AsignaturaNivelBase'
 			controller_name == 'asignatura_bases'
 		else
-			true
+			['TemaAyuda', 'Tutorial', 'Paso'].include?(objeto.class.name) ? (usuario_signed_in? ? session[:es_administrador] : false) : true
 		end
 	end
 
@@ -105,8 +105,10 @@ module RecursosHelper
 			"documento/#{controller}/detail"
 		elsif ['asignatura_bases', 'asignatura_nivel_bases'].include?(controller_name)
 			"estructura/#{controller}/detail"
-		else
+		elsif [].include?(controller_name)
 			"#{controller}/detail"
+		else
+			'0p/form/detail'
 		end
 	end
 
@@ -123,12 +125,14 @@ module RecursosHelper
 	## ------------------------------------------------------- SHOW
 
 	# Método de apoyo usado en get_new_link (abajo)
-	def objeto_title(objeto)
+	def show_title(objeto)
 		case objeto.class.name
 		when 'AsignaturaNivelBase'
 			objeto.d_asignatura_nivel
 		when 'Linea'
 			objeto.columnas.order(:orden).first.columna
+		else
+			objeto.send(objeto.class.name.downcase)
 		end
 	end
 

@@ -32,17 +32,6 @@ module Cupertino
         nuevo:   {'self' => true,  'show' => false}
     }
 
-    # Se verifica con el helper in_show?(c, label)
-    config.s_default = {
-        titulo:       true,
-        links:        true,
-        clasifica:   false,
-        detalle:     false,
-        inline_form: false,
-        tabla:        true,
-        adjuntos:    false
-    }
-
     ## ------------------------------------------------- APARIENCIA APLICACION
 
     config.look_app = {
@@ -164,11 +153,6 @@ module Cupertino
     ## ------------------------------------------------- FORM
 
     config.form = {
-        detail_types_controller: {
-            help: ['mejoras', 'mensajes', 'observaciones', 'tema_ayudas', 'tutoriales', 'pasos'],
-            data: ['especificaciones', 'tablas'],
-            modelo: ['documento_bases', 'asignatura_bases', 'asignatura_nivel_bases']
-        },
         conditional_fields: {
             'Publicacion' => [
                 'd_quote',
@@ -198,12 +182,7 @@ module Cupertino
     ## ------------------------------------------------- SHOW
 
     config.show = {
-        titulo: [],
-        show_title: ['AsignaturaNivelBase'],
         partial_links: [],
-        detalle: ['Publicacion', 'Equipo'],
-        inline_form: ['Equipo'],
-        tabla: ['Publicacion'],
         links: ['Publicacion'],
         bt_links: {
             'Publicacion' => ['revista']
@@ -211,18 +190,7 @@ module Cupertino
         hmt_links: {
             'Publicacion' => ['investigadores']
         },
-        status: ['AsignaturaNivelBase'],
-        hidden: {
-            'publicaciones'  => ['autores', 'investigadores', 'procesos', 'cargas', 'clasificaciones', 'carpetas', 'evaluaciones', 'asignaciones', 'areas', 'rutas', 'instancias', 'etiquetas'],
-            'carpetas'       => ['clasificaciones', 'herencias'],
-            'investigadores' => ['autores', 'carpetas'],
-            'equipos'        => ['investigadores', 'instancias', 'integrantes', 'herencias'],
-            'areas'          => ['clasificaciones', 'cargas'],
-            'conceptos'      => ['rel_hijos', 'hijos', 'diccionarios'],
-            'instancias'     => ['rutas', 'diccionarios', 'propuestas'],
-            'categorias'     => ['etiquetas', 'suscripciones', 'perfiles'],
-            'especies'       => ['etiquetas']
-        }
+        status: ['AsignaturaNivelBase']
     }
 
   end

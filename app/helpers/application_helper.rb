@@ -35,8 +35,26 @@ module ApplicationHelper
 		end
 	end
 
+	def colors
+		Rails.configuration.look_parameters[:colors]
+	end
+
+	def image_sizes
+		Rails.configuration.look_parameters[:image_sizes]
+	end
+
 	def objeto_tema_ayuda(tipo)
 		TemaAyuda.where(tipo: tipo).any? ? TemaAyuda.where(tipo: tipo).first : nil
+	end
+
+	def coleccion_tema_ayuda(tipo)
+		temas_ayuda_tipo = TemaAyuda.where(tipo: tipo)
+		if temas_ayuda_tipo.any?
+			temas_ayuda_activos = temas_ayuda_tipo.where(activo: true)
+			temas_ayuda_activos.any? ? temas_ayuda_activos.order(:orden) : nil
+		else
+			nil
+		end
 	end
 
 	## ------------------------------------------------------- MENU
@@ -117,7 +135,7 @@ module ApplicationHelper
 		end
 	end
 
-	# Objtiene LINK DEL BOTON NEWf
+	# Objtiene LINK DEL BOTON NEW
 	def get_new_link(controller)
 		if config_exceptions_table(:inline_form)[controller].present?
 			unless config_exceptions_table(:inline_form)[controller].include?('*') or (config_exceptions_table(:inline_form)[controller].include?('self') and controller == controller_name) or config_exceptions_table(:inline_form)[controller].include?(controller_name)
@@ -161,6 +179,13 @@ module ApplicationHelper
 
 	## ------------------------------------------------------- TABLA | BTNS
 
+	def link_x_btn(objeto, accion, objeto_ref)
+		ruta_raiz = "/#{objeto.class.name.tableize}/#{objeto.id}#{accion}"
+		ruta_objeto = (objeto_ref and @objeto.present?) ? "#{(!!accion.match(/\?+/) ? '&' : '?')}class_name=#{@objeto.class.name}&objeto_id=#{@objeto.id}" : ''
+#		"/#{objeto.class.name.tableize}/#{objeto.id}#{btn[1]}#{(!!btn[1].match(/\?+/) ? '&' : '?') if btn[2]}#{"class_name=#{@objeto.class.name}&objeto_id=#{@objeto.id if @objeto.present?}" if btn[2]}"
+		"#{ruta_raiz}#{ruta_objeto}"
+	end
+
 	# pregunta si tiene childs
 	# "_btns_e.html.erb"
 	def has_child?(objeto)
@@ -190,14 +215,14 @@ module ApplicationHelper
 	end
 
 	def detail_partial(controller)
-		if Rails.configuration.form[:detail_types_controller][:help].include?(controller)
+		if ['tema_ayudas', 'tutoriales', 'pasos', 'mensajes'].include?(controller)
 			"help/0help/#{controller.singularize}/detail"
-		elsif Rails.configuration.form[:detail_types_controller][:data].include?(controller)
-			"0data/#{controller.singularize}/detail"
-		elsif Rails.configuration.form[:detail_types_controller][:modelo].include?(controller)
-			detail_controller_path(controller)
+		elsif ['etapas', 'tablas', 'lineas', 'especificaciones'].include?(controller)
+			"data/0data/#{controller.singularize}/detail"
+		elsif ['observaciones', 'perfiles', 'mejoras', 'comentarios'].include?(controller)
+			"aplicacion/#{controller}/detail"
 		else
-			'0p/form/detail'
+			detail_controller_path(controller)
 		end
 	end
 
@@ -239,29 +264,6 @@ module ApplicationHelper
 
 	def status?(objeto)
 		config_show(:status).include?(objeto.class.name)
-	end
-
-	# Maneja comportamiento por defecto y excepciones de SHOW
-	def in_show?(objeto, label)
-		defecto = Rails.configuration.s_default[label]
-		(config_show(label).include?(objeto.class.name) ? (not defecto) : defecto)
-	end
-
-	# SHOW_TITLE con manejo de excepciones
-	# Se usa dentro de la aplicación también
-	def show_title(objeto)
-		Rails.configuration.show[:show_title].include?(objeto.class.name) ? objeto_title(objeto) : objeto.send(objeto.class.name.tableize.singularize)
-	end
-
-	# método de apoyo usado en el método has_many_tabs (arriba)
-	def hidden_childs(controller)
-		config_show(:hidden)[controller].present? ? config_show(:hidden)[controller] : []
-	end
-
-	# Toma las relaciones has_many y les descuenta las HIDDEN_CHILDS
-	# "_show.html.erb"
-	def has_many_tabs(controller)
-		controller.classify.constantize.reflect_on_all_associations(:has_many).map {|a| a.name.to_s} - hidden_childs(controller)
 	end
 
 	## ------------------------------------------------------- GENERAL
