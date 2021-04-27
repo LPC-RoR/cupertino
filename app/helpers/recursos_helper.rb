@@ -132,7 +132,7 @@ module RecursosHelper
 		when 'Linea'
 			objeto.columnas.order(:orden).first.columna
 		else
-			objeto.send(objeto.class.name.downcase)
+			objeto.send(objeto.class.name.tableize.singularize)
 		end
 	end
 
