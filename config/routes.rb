@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :coberturas
   # SCOPE APLICACION
   scope module: 'aplicacion' do
     resources :administradores
