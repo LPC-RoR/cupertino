@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_30_032547) do
+ActiveRecord::Schema.define(version: 2021_04_28_003354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,15 @@ ActiveRecord::Schema.define(version: 2021_03_30_032547) do
     t.datetime "updated_at", null: false
     t.index ["documento_base_id"], name: "index_citas_on_documento_base_id"
     t.index ["referencia_base_id"], name: "index_citas_on_referencia_base_id"
+  end
+
+  create_table "coberturas", force: :cascade do |t|
+    t.integer "asignatura_base_id"
+    t.integer "tipo_asignatura_base_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["asignatura_base_id"], name: "index_coberturas_on_asignatura_base_id"
+    t.index ["tipo_asignatura_base_id"], name: "index_coberturas_on_tipo_asignatura_base_id"
   end
 
   create_table "conversaciones", force: :cascade do |t|

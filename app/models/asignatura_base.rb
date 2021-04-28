@@ -19,6 +19,9 @@ class AsignaturaBase < ApplicationRecord
 	has_many :referencias
 	has_many :documento_bases, through: :referencias
 
+	has_many :coberturas
+	has_many :tipo_asignatura_bases, through: :coberturas
+
 	def d_detalle
 	  self.detalle.blank? ? '' : self.detalle.gsub(/\n/, '<br>')
 	end
