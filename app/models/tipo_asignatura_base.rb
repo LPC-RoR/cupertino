@@ -7,9 +7,10 @@ class TipoAsignaturaBase < ApplicationRecord
 
 	# -------------------- FORM  -----------------------
  	FORM_FIELDS = [
- 		['orden',                'entry'],
-		['tipo_asignatura_base', 'entry'],
-		['curriculum_base_id',  'hidden']
+ 		['orden',                 'entry'],
+		['tipo_asignatura_base',  'entry'],
+		['nombre_contenido_base', 'entry'],
+		['curriculum_base_id',   'hidden']
 	]
 
 	belongs_to :curriculum_base

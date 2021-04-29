@@ -34,7 +34,10 @@ Rails.application.routes.draw do
       match :asigna_select_elemento, via: :post, on: :collection
       match :desasignar, via: :get, on: :member
     end
-    resources :asignatura_nivel_bases
+    resources :asignatura_nivel_bases do
+      resources :contenido_bases
+    end
+    resources :contenido_bases
     resources :curriculums
     resources :curriculum_bases do
       resources :nivel_bases

@@ -1,0 +1,27 @@
+<%= form_with(model: contenido_base, local: true) do |form| %>
+  <% if contenido_base.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contenido_base.errors.count, "error") %> prohibited this contenido_base from being saved:</h2>
+
+      <ul>
+      <% contenido_base.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :asignatura_nivel_base_id %>
+    <%= form.number_field :asignatura_nivel_base_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contenido_base %>
+    <%= form.text_field :contenido_base %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

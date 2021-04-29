@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Contenido Bases</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Asignatura nivel base</th>
+      <th>Contenido base</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contenido_bases.each do |contenido_base| %>
+      <tr>
+        <td><%= contenido_base.asignatura_nivel_base_id %></td>
+        <td><%= contenido_base.contenido_base %></td>
+        <td><%= link_to 'Show', contenido_base %></td>
+        <td><%= link_to 'Edit', edit_contenido_base_path(contenido_base) %></td>
+        <td><%= link_to 'Destroy', contenido_base, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Contenido Base', new_contenido_base_path %>

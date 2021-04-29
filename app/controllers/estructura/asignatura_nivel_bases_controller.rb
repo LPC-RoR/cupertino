@@ -43,6 +43,7 @@ class Estructura::AsignaturaNivelBasesController < ApplicationController
     @coleccion = {}
     @coleccion['documento_bases'] = @objeto.documento_bases.order(:documento_base)
     @coleccion['nivel_bases'] = @objeto.nivel_bases.order(:orden)
+    @coleccion['contenido_bases'] = @objeto.contenido_bases.order(:orden)
   end
 
   # GET /asignatura_nivel_bases/new

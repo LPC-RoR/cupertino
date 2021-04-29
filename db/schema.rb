@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_28_003354) do
+ActiveRecord::Schema.define(version: 2021_04_29_010444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,17 @@ ActiveRecord::Schema.define(version: 2021_04_28_003354) do
     t.datetime "updated_at", null: false
     t.index ["asignatura_base_id"], name: "index_coberturas_on_asignatura_base_id"
     t.index ["tipo_asignatura_base_id"], name: "index_coberturas_on_tipo_asignatura_base_id"
+  end
+
+  create_table "contenido_bases", force: :cascade do |t|
+    t.integer "asignatura_nivel_base_id"
+    t.string "contenido_base"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "nombre_contenido_base"
+    t.integer "orden"
+    t.index ["asignatura_nivel_base_id"], name: "index_contenido_bases_on_asignatura_nivel_base_id"
+    t.index ["orden"], name: "index_contenido_bases_on_orden"
   end
 
   create_table "conversaciones", force: :cascade do |t|

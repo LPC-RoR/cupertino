@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Asignatura nivel base:</strong>
+  <%= @contenido_base.asignatura_nivel_base_id %>
+</p>
+
+<p>
+  <strong>Contenido base:</strong>
+  <%= @contenido_base.contenido_base %>
+</p>
+
+<%= link_to 'Edit', edit_contenido_base_path(@contenido_base) %> |
+<%= link_to 'Back', contenido_bases_path %>
