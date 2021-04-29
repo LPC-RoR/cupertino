@@ -74,6 +74,6 @@ class Estructura::ContenidoBasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contenido_base_params
-      params.require(:contenido_base).permit(:asignatura_nivel_base_id, :contenido_base)
+      params.require(:contenido_base).permit(:asignatura_nivel_base_id, :contenido_base, :orden)
     end
 end

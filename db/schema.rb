@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_29_010444) do
+ActiveRecord::Schema.define(version: 2021_04_29_020344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 2021_04_29_010444) do
     t.string "contenido_base"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "nombre_contenido_base"
     t.integer "orden"
     t.index ["asignatura_nivel_base_id"], name: "index_contenido_bases_on_asignatura_nivel_base_id"
     t.index ["orden"], name: "index_contenido_bases_on_orden"
@@ -245,6 +244,7 @@ ActiveRecord::Schema.define(version: 2021_04_29_010444) do
     t.integer "curriculum_base_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "nombre_contenido_base"
     t.index ["curriculum_base_id"], name: "index_tipo_asignatura_bases_on_curriculum_base_id"
     t.index ["orden"], name: "index_tipo_asignatura_bases_on_orden"
   end
